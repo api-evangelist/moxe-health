@@ -1,0 +1,261 @@
+{
+  "openapi": "3.0.1",
+  "x-readme": {
+    "explorer-enabled": false,
+    "proxy-enabled": true
+  },
+  "x-amazon-apigateway-importexport-version": "1.0",
+  "info": {
+    "title": "Chart Retrieval API",
+    "version": "0.1.0",
+    "description": "In order to use this api, we require each request gets sent with an api key in the named header, \"x-api-key\". <br><br> We impose a rate limit for the whole api. If the rate limit is reached, the client will receive the response, \"HTTP 429 Too Many Requests\"."
+  },
+  "servers": [
+    {
+      "url": "https://${environment}-api.moxehealth.com/chart-retrieval"
+    }
+  ],
+  "paths": {
+    "/v1/patient-chart-request": {
+      "post": {
+        "tags": [
+          "Patient"
+        ],
+        "summary": "Initiate Request",
+        "description": "Initiate a new request for patient data",
+        "operationId": "initiateChartRequest",
+        "requestBody": {
+          "description": "Information about the patient whose data is being requested",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/patientChartRequestRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "http_proxy",
+          "uri": "https://${environment}-chaselistmanager.moxehealth.com/chart-retrieval/v1/patient-chart-request",
+          "httpMethod": "POST",
+          "connectionType": "VPC_LINK",
+          "connectionId": "${vpc_link}"
+        },
+        "responses": {
+          "202": {
+            "description": "Chart request was accepted but processing has not necessarily begun",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/patientChartRequestResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "The user or app initiating the request was not authenticated. Reauthenticate and try again."
+          },
+          "403": {
+            "description": "The user or app does not have the appropriate permissions to make this request"
+          },
+          "429": {
+            "description": "Too many requests. API rate limit reached."
+          },
+          "500": {
+            "description": "The request was valid, but an unexpected error occured on the server"
+          }
+        },
+        "security": [
+          {
+            "moxe_auth": [
+              "write:patient-chart-request"
+            ]
+          },
+          {
+            "${environment}-chart-retrieval-api-authorizer": []
+          },
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "patientChartRequestRequest": {
+        "required": [
+          "RequestId",
+          "MemberId",
+          "DateOfBirth",
+          "FirstName",
+          "LastName",
+          "AdministrativeGender",
+          "PurposeOfUse",
+          "RequestSourceId",
+          "StartDate",
+          "EndDate",
+          "ProviderOrganizationId"
+        ],
+        "type": "object",
+        "properties": {
+          "RequestId": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "Customer generated RequestId. This does not have to be unique between requests."
+          },
+          "MemberId": {
+            "type": "string",
+            "description": "Member’s unique identifier"
+          },
+          "DateOfBirth": {
+            "type": "string",
+            "description": "Member’s date of birth (YYYY-MM-DD)"
+          },
+          "FirstName": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "Member’s first name"
+          },
+          "LastName": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "Member’s last name"
+          },
+          "MiddleName": {
+            "type": "string",
+            "description": "Member’s middle name"
+          },
+          "AdministrativeGender": {
+            "type": "string",
+            "description": "Member’s gender. Allowed values are — male, female, other, unknown."
+          },
+          "Address1": {
+            "type": "string",
+            "description": "Member’s primary address line 1"
+          },
+          "Address2": {
+            "type": "string",
+            "description": "Member’s primary address line 2"
+          },
+          "City": {
+            "type": "string",
+            "description": "Member’s primary city"
+          },
+          "State": {
+            "type": "string",
+            "description": "Member’s primary state (2 letter abbreviation)"
+          },
+          "Zip": {
+            "type": "string",
+            "description": "Member’s primary 5-digit zip code"
+          },
+          "PurposeOfUse": {
+            "type": "string",
+            "description": "The reason for the request. Work with your Moxe representative to discuss allowed values."
+          },
+          "RequestSourceId": {
+            "type": "string",
+            "description": "The group authorized to issue the request. Work with your Moxe representative to discuss allowed values."
+          },
+          "StartDate": {
+            "type": "string",
+            "description": "The start date of service for data to include in the request (YYYY-MM-DD)"
+          },
+          "EndDate": {
+            "type": "string",
+            "description": "The end date of service for data to include in the request (YYYY-MM-DD)"
+          },
+          "ProviderOrganizationId": {
+            "type": "string",
+            "description": "An identifier agreed used to specify the organization from which Moxe will pull data. Work with your Moxe representative to discuss allowed values."
+          },
+          "TIN": {
+            "type": "string",
+            "description": "The organization tax identifier number from which Moxe will pull data."
+          }
+        }
+      },
+      "patientChartRequestResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "moxeRequestId": {
+                "type": "string",
+                "description": "The unique identifier of this request within Moxe's system"
+              },
+              "links": {
+                "type": "array",
+                "description": "A list of links that can be used to access resources related to the created patient chart request",
+                "items": {
+                  "$ref": "#/components/schemas/link"
+                }
+              }
+            }
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The timestamp of when this request was created"
+          },
+          "createdBy": {
+            "type": "string",
+            "description": "The unique identifier of the client that initiated this request"
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "A URL endpoint used to fetch the status of the request"
+          },
+          "method": {
+            "type": "string",
+            "description": "The HTTP verb used with the href to return the status of the request"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "moxe_auth": {
+        "type": "oauth2",
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "https://${environment}-api.moxehealth.com/oauth/token",
+            "scopes": {
+              "write:patient-chart-request": "create patient chart transactions",
+              "read:patient-chart-request": "get information on existing transactions"
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-si-base": "./api/chartretrievalapi.yaml",
+  "x-github-repo": "MoxeHealth/ChaseListManager",
+  "x-github-sha": "6705c89c377f138b5d91395fcaba1440c7aed96a",
+  "_id": {
+    "buffer": {
+      "0": 97,
+      "1": 141,
+      "2": 52,
+      "3": 90,
+      "4": 57,
+      "5": 167,
+      "6": 9,
+      "7": 102,
+      "8": 107,
+      "9": 5,
+      "10": 11,
+      "11": 135
+    }
+  }
+}

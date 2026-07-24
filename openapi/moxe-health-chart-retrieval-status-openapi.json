@@ -1,0 +1,156 @@
+{
+  "openapi": "3.0.1",
+  "x-readme": {
+    "explorer-enabled": false,
+    "proxy-enabled": true
+  },
+  "x-amazon-apigateway-importexport-version": "1.0",
+  "info": {
+    "title": "Chart Retrieval API",
+    "version": "0.1.0",
+    "description": "In order to use this api, we require each request gets sent with an api key in the named header, \"x-api-key\". <br><br> We impose a rate limit for the whole api. If the rate limit is reached, the client will receive the response, \"HTTP 429 Too Many Requests\"."
+  },
+  "servers": [
+    {
+      "url": "https://${environment}-api.moxehealth.com/chart-retrieval"
+    }
+  ],
+  "paths": {
+    "/v1/patient-chart-request/{moxeRequestId}/status": {
+      "get": {
+        "tags": [
+          "Patient"
+        ],
+        "summary": "Get Status",
+        "description": "Get the status of the specified patient chart request",
+        "operationId": "getChartRequestStatus",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "moxeRequestId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "The moxeRequestId provided by us when the patient-chart-request in question was created"
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "type": "http_proxy",
+          "uri": "https://${environment}-chaselistmanager.moxehealth.com/chart-retrieval/v1/patient-chart-request/{moxeRequestId}/status",
+          "httpMethod": "GET",
+          "connectionType": "VPC_LINK",
+          "connectionId": "${vpc_link}",
+          "requestParameters": {
+            "integration.request.path.moxeRequestId": "method.request.path.moxeRequestId"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully determined the status of the given request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/patientChartRequestStatus"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The user or app initiating the request was not authenticated. Reauthenticate and try again."
+          },
+          "404": {
+            "description": "A patient chart request with the given moxeRequestId could not be found. This means that either you are not authorized to access the request or it does not exist."
+          },
+          "429": {
+            "description": "Too many requests. API rate limit reached."
+          },
+          "500": {
+            "description": "The request was valid, but an unexpected error occured on the server"
+          }
+        },
+        "security": [
+          {
+            "moxe_auth": [
+              "read:patient-chart-request"
+            ]
+          },
+          {
+            "${environment}-chart-retrieval-api-authorizer": []
+          },
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "patientChartRequestStatus": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "requestId": {
+                "type": "string",
+                "description": "The request ID initially provided when the request was initiated"
+              },
+              "moxeRequestId": {
+                "type": "string",
+                "description": "The unique identifier of this request within Moxe's system"
+              },
+              "requestStatusCode": {
+                "type": "string",
+                "description": "A code representing the current status of the request"
+              },
+              "requestStatusDescription": {
+                "type": "string",
+                "description": "A human-readable description of the status of the request, which correspends to the requestStatusCode"
+              },
+              "requestStatusDateTime": {
+                "type": "string",
+                "format": "date-time",
+                "description": "The timestamp of when the request entered into the reported status"
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "moxe_auth": {
+        "type": "oauth2",
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "https://${environment}-api.moxehealth.com/oauth/token",
+            "scopes": {
+              "write:patient-chart-request": "create patient chart transactions",
+              "read:patient-chart-request": "get information on existing transactions"
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-si-base": "./api/chartretrievalapi.yaml",
+  "x-github-repo": "MoxeHealth/ChaseListManager",
+  "x-github-sha": "6705c89c377f138b5d91395fcaba1440c7aed96a",
+  "_id": {
+    "buffer": {
+      "0": 97,
+      "1": 141,
+      "2": 52,
+      "3": 90,
+      "4": 57,
+      "5": 167,
+      "6": 9,
+      "7": 102,
+      "8": 107,
+      "9": 5,
+      "10": 11,
+      "11": 135
+    }
+  }
+}

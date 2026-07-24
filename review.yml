@@ -1,0 +1,133 @@
+aid: moxe-health
+name: Moxe Health
+review:
+  question: Does Moxe Health expose a documented public API surface, and is it HL7 FHIR?
+  answer: true
+  fhir: false
+  date: '2026-07-24'
+  reviewer: API Evangelist
+  homeMarket: United States
+findings:
+  summary: |
+    Moxe Health publishes a live, self-service-readable developer portal at
+    https://developer.moxehealth.com/ (HTTP 200, hosted on ReadMe.io / mirror
+    at https://moxe-docs.readme.io). The documented product is a single REST
+    "Chart Retrieval API" (OpenAPI 3.0.1, version 0.1.0) that segments into two
+    request families: patient chart retrieval and claim management. The API is
+    NOT HL7 FHIR - there is no FHIR CapabilityStatement (/metadata) and no
+    SMART-on-FHIR .well-known/smart-configuration; the surface is plain
+    REST/JSON. Requests are initiated with member/subscriber identifiers plus
+    patient demographics and a date-of-service range; Moxe searches connected
+    EHRs and returns the extracted minimum-necessary clinical chart to a
+    predetermined location via SFTP (the API itself returns 202 Accepted plus a
+    status endpoint, not the chart body). Onboarding is gated: credentials
+    (Client ID, Client Secret, API Key, Audience, OAuth2 token endpoint) are
+    issued by Moxe after a partner consult, so the endpoints are documented but
+    not open self-serve.
+  homeMarket: United States
+  fhirCapabilityStatement:
+    present: false
+    metadataProbed:
+      - url: https://api.moxehealth.com/metadata
+        status: '000'
+      - url: https://fhir.moxehealth.com/metadata
+        status: '000'
+    smartConfiguration:
+      - url: https://developer.moxehealth.com/.well-known/smart-configuration
+        status: '404'
+      - url: https://api.moxehealth.com/.well-known/smart-configuration
+        status: '000'
+    note: >-
+      No FHIR base, CapabilityStatement, or SMART-on-FHIR discovery document is
+      served. Moxe's model is a REST clinical-data clearinghouse, not a FHIR
+      server.
+  standardsConformance:
+    hl7Fhir: false
+    usCore: false
+    ukCore: false
+    auCore: false
+    daVinci: false
+    carinBlueButton: false
+    note: >-
+      The documented Chart Retrieval API uses Moxe-proprietary REST/JSON schemas
+      (patientChartRequestRequest, etc.), not US Core / Da Vinci / CARIN FHIR
+      implementation guides. Compliance posture is HIPAA and SOC 2 Type 2.
+  authModel:
+    scheme: OAuth2 client-credentials + API key header
+    tokenGrant: client_credentials
+    tokenRequest: >-
+      POST {OAuth2 Token Endpoint} with
+      audience={AUDIENCE}&grant_type=client_credentials&client_id={Client ID}&client_secret={Client Secret};
+      response returns a Bearer access_token (expires_in 900).
+    callHeaders:
+      - Authorization/Authentication Bearer {access_token}
+      - x-api-key {Moxe API Key}
+    smartOnFhir: false
+    scopes:
+      - write:patient-chart-request
+    note: >-
+      Credentials are provisioned by Moxe to onboarded partners. A per-API rate
+      limit is enforced (HTTP 429 on exceed).
+  onboarding: gated-partner-agreement
+  specsHarvested:
+    count: 4
+    format: OpenAPI 3.0.1 (JSON)
+    provenance: >-
+      Extracted verbatim from the embedded "OpenAPI definition" JSON blocks on
+      the ReadMe.io reference pages (moxe-docs.readme.io/reference/*.md). All
+      four belong to one "Chart Retrieval API" v0.1.0 and parse as valid
+      OpenAPI 3.0.1.
+    files:
+      - openapi/moxe-health-chart-retrieval-initiate-openapi.json
+      - openapi/moxe-health-chart-retrieval-status-openapi.json
+      - openapi/moxe-health-claim-management-initiate-openapi.json
+      - openapi/moxe-health-claim-management-status-openapi.json
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://int-api.moxehealth.com/chart-retrieval
+      documented: true
+      note: OpenAPI server templated as https://${environment}-api.moxehealth.com/chart-retrieval; int-api host shown in the authentication example.
+    - protocol: SFTP
+      documented: true
+      note: Retrieved chart data is delivered back to a predetermined SFTP location, not returned inline in the API response.
+    - protocol: FHIR
+      documented: false
+      note: No HL7 FHIR base URL or CapabilityStatement is documented.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No streaming/WebSocket surface is documented.
+  endpointsConfirmedRest:
+    - POST https://int-api.moxehealth.com/chart-retrieval/v1/patient-chart-request
+    - GET  https://int-api.moxehealth.com/chart-retrieval/v1/patient-chart-request/{moxeRequestId}/status
+    - POST https://int-api.moxehealth.com/chart-retrieval/v1/claim-management-request
+    - GET  https://int-api.moxehealth.com/chart-retrieval/v1/claim-management-request/{moxeRequestId}/status
+sources:
+  - url: https://developer.moxehealth.com/
+    type: DeveloperPortal
+    status: '200'
+    note: Live ReadMe.io-hosted developer portal for Moxe.
+  - url: https://developer.moxehealth.com/docs/getting-started
+    type: Documentation
+    status: '200'
+    note: Introduction - describes Chart Retrieval APIs ingesting ROI requests and EHR search.
+  - url: https://developer.moxehealth.com/docs/authentication
+    type: Authentication
+    status: '200'
+    note: OAuth2 client_credentials token flow plus x-api-key header; int-api.moxehealth.com example.
+  - url: https://developer.moxehealth.com/reference/overview
+    type: APIReference
+    status: '200'
+    note: Chart Retrieval API overview; results delivered via SFTP.
+  - url: https://moxe-docs.readme.io/reference/initiatechartrequest.md
+    type: APIReference
+    status: '200'
+    note: Embeds verbatim OpenAPI 3.0.1 for POST /v1/patient-chart-request.
+  - url: https://moxe-docs.readme.io/reference/getclaimmanagementrequeststatus.md
+    type: APIReference
+    status: '200'
+    note: Embeds verbatim OpenAPI 3.0.1 for GET /v1/claim-management-request/{moxeRequestId}/status.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

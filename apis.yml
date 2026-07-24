@@ -1,0 +1,122 @@
+aid: moxe-health
+url: https://raw.githubusercontent.com/api-evangelist/moxe-health/refs/heads/main/apis.yml
+name: Moxe Health
+kind: company
+description: >-
+  Moxe Health is a United States healthcare data interoperability company,
+  headquartered in Madison, Wisconsin, that operates the Clinical Data Clearinghouse
+  for secure clinical data exchange between health plans (payers) and health systems
+  (providers). Moxe's API-first platform ingests release-of-information (ROI) requests,
+  searches connected electronic health records (EHRs) to extract the minimum-necessary
+  contextual clinical data for a specified patient and date range, and securely delivers
+  that data to the partner's system. Its Chart Retrieval API supports risk adjustment,
+  quality improvement, claim management, payment integrity, care management, and forecasting
+  use cases. The public developer portal documents a REST (OpenAPI 3.0.1) Chart Retrieval
+  API secured with OAuth2 client-credentials plus an x-api-key header; retrieved charts
+  are returned to a predetermined location via SFTP. Moxe is HIPAA and SOC 2 Type 2
+  compliant and was named number 1 Best in KLAS for Payer-Provider Data Exchange. The
+  documented API is REST/JSON rather than HL7 FHIR, and full access is granted through
+  a partner onboarding agreement.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Healthcare
+- United States
+- Interoperability
+- Clinical Data
+- Payer
+- Provider
+- EHR
+- Health Data Exchange
+- Claims
+- Risk Adjustment
+created: '2026-07-24'
+modified: '2026-07-24'
+specificationVersion: '0.19'
+apis:
+- aid: moxe-health:moxe-health-chart-retrieval-api
+  name: Moxe Health Chart Retrieval API
+  description: Initiate a patient chart request and check its status. The API ingests
+    a release-of-information request with member and demographic identifiers, searches
+    connected EHRs for the specified patient and date-of-service range, and delivers
+    the extracted clinical data to a predetermined SFTP location. REST/JSON, OpenAPI
+    3.0.1, secured with OAuth2 client-credentials plus an x-api-key header.
+  humanURL: https://developer.moxehealth.com/reference/overview
+  baseURL: https://int-api.moxehealth.com/chart-retrieval
+  tags:
+  - Patient
+  - Chart Retrieval
+  - Clinical Data
+  properties:
+  - type: OpenAPI
+    url: openapi/moxe-health-chart-retrieval-initiate-openapi.json
+  - type: OpenAPI
+    url: openapi/moxe-health-chart-retrieval-status-openapi.json
+  - type: Documentation
+    url: https://developer.moxehealth.com/reference/overview
+  - type: APIReference
+    url: https://developer.moxehealth.com/reference/initiatechartrequest
+  - type: APIReference
+    url: https://developer.moxehealth.com/reference/getchartrequeststatus
+  - type: Documentation
+    url: https://developer.moxehealth.com/reference/request-source-ids
+  - type: Authentication
+    url: https://developer.moxehealth.com/docs/authentication
+- aid: moxe-health:moxe-health-claim-management-api
+  name: Moxe Health Claim Management API
+  description: Initiate a claim management request and check its status. Retrieves
+    the clinical chart supporting a specific claim by member and claim identifiers,
+    then delivers the extracted data to a predetermined location. REST/JSON, OpenAPI
+    3.0.1, secured with OAuth2 client-credentials plus an x-api-key header.
+  humanURL: https://developer.moxehealth.com/reference/overview
+  baseURL: https://int-api.moxehealth.com/chart-retrieval
+  tags:
+  - Claims
+  - Claim Management
+  - Clinical Data
+  properties:
+  - type: OpenAPI
+    url: openapi/moxe-health-claim-management-initiate-openapi.json
+  - type: OpenAPI
+    url: openapi/moxe-health-claim-management-status-openapi.json
+  - type: Documentation
+    url: https://developer.moxehealth.com/reference/overview
+  - type: APIReference
+    url: https://developer.moxehealth.com/reference/initiateclaimmanagementrequest
+  - type: APIReference
+    url: https://developer.moxehealth.com/reference/getclaimmanagementrequeststatus
+  - type: Authentication
+    url: https://developer.moxehealth.com/docs/authentication
+common:
+- type: Website
+  url: https://moxehealth.com/
+- type: DeveloperPortal
+  url: https://developer.moxehealth.com/
+- type: Documentation
+  url: https://developer.moxehealth.com/docs/getting-started
+- type: GettingStarted
+  url: https://developer.moxehealth.com/docs/getting-started
+- type: APIReference
+  url: https://developer.moxehealth.com/reference/overview
+- type: Authentication
+  url: https://developer.moxehealth.com/docs/authentication
+- type: SignUp
+  url: https://developer.moxehealth.com/login
+- type: GitHubOrganization
+  url: https://github.com/moxehealth
+- type: LinkedIn
+  url: https://www.linkedin.com/company/moxe-health
+- type: Blog
+  url: https://moxehealth.com/insights
+- type: Security
+  url: https://moxehealth.com/security/
+- type: PrivacyPolicy
+  url: https://moxehealth.com/privacy-policy/
+- type: TermsOfService
+  url: https://moxehealth.com/moxe-technology-governing-agreement/
+- type: Support
+  url: https://moxehealth.com/contact/
+- type: LLMsTxt
+  url: https://developer.moxehealth.com/llms.txt
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
