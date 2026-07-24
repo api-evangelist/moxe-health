@@ -1,0 +1,18 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Moxe Health Chart Retrieval (Initiate Request)
+  version: 1.0.0
+extends: openapi/moxe-health-chart-retrieval-initiate-openapi.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enrichment:
+      auth: OAuth2 client-credentials (15-min token) + x-api-key header; partner-onboarded.
+      async_model: 202 Accepted then poll /status; chart delivered via SFTP out-of-band.
+      idempotency: none (RequestId is not a unique/idempotency key).
+      compliance: HIPAA, SOC 2 Type 2, GDPR (moxehealth.com/security).
+- target: $.paths['/v1/patient-chart-request'].post
+  update:
+    x-apievangelist-notes: >-
+      Initiates a release-of-information request. Requires member identifiers, patient
+      demographics, and a date-of-service range. Returns a moxeRequestId for status polling.

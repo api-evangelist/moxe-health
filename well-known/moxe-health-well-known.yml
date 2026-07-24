@@ -1,0 +1,19 @@
+generated: '2026-07-24'
+method: searched
+note: >-
+  Probed the /.well-known/ discovery surface on the website, developer portal, and API hosts.
+  No documents returned 200. The API host (int-api.moxehealth.com) returns 403 for all
+  /.well-known/ paths (gateway-gated, not a public discovery surface). No security.txt,
+  OIDC, OAuth, api-catalog, ai-plugin, or SMART configuration is published. Absence is valid,
+  expected data for a partner-gated healthcare API.
+documents: []
+probes:
+- {host: https://developer.moxehealth.com, path: /.well-known/security.txt, status: 404}
+- {host: https://developer.moxehealth.com, path: /.well-known/openid-configuration, status: 404}
+- {host: https://developer.moxehealth.com, path: /.well-known/oauth-authorization-server, status: 404}
+- {host: https://int-api.moxehealth.com, path: /.well-known/oauth-authorization-server, status: 403}
+- {host: https://int-api.moxehealth.com, path: /.well-known/oauth-protected-resource, status: 403}
+- {host: https://int-api.moxehealth.com, path: /.well-known/openid-configuration, status: 403}
+- {host: https://moxehealth.com, path: /.well-known/security.txt, status: 404}
+- {host: https://moxehealth.com, path: /security.txt, status: 404}
+- {host: https://developer.moxehealth.com, path: /.well-known/smart-configuration, status: 404}

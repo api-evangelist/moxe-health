@@ -1,0 +1,55 @@
+generated: '2026-07-24'
+method: derived
+source: openapi/moxe-health-chart-retrieval-initiate-openapi.json, openapi/moxe-health-chart-retrieval-status-openapi.json,
+  openapi/moxe-health-claim-management-initiate-openapi.json, openapi/moxe-health-claim-management-status-openapi.json
+format: http-status
+envelope: >-
+  Errors are returned as bare HTTP status codes with a human-readable description. The API
+  does NOT use RFC 9457 application/problem+json; there is no structured problem-type body.
+problems:
+- status: 400
+  title: Invalid input
+  description: The request body failed validation (missing or malformed required fields).
+  source_operations:
+  - openapi/moxe-health-chart-retrieval-initiate-openapi.json#initiateChartRequest
+  - openapi/moxe-health-claim-management-initiate-openapi.json#initiateClaimManagementRequest
+- status: 401
+  title: Unauthenticated
+  description: The user or app initiating the request was not authenticated. Reauthenticate and try again.
+  remediation: Refresh the OAuth2 client-credentials bearer token (15-minute TTL) and resend with a valid x-api-key.
+  source_operations:
+  - openapi/moxe-health-chart-retrieval-initiate-openapi.json#initiateChartRequest
+  - openapi/moxe-health-chart-retrieval-status-openapi.json#getChartRequestStatus
+  - openapi/moxe-health-claim-management-initiate-openapi.json#initiateClaimManagementRequest
+  - openapi/moxe-health-claim-management-status-openapi.json#getClaimManagementRequestStatus
+- status: 403
+  title: Forbidden
+  description: The user or app does not have the appropriate permissions (OAuth2 scope) to make this request.
+  source_operations:
+  - openapi/moxe-health-chart-retrieval-initiate-openapi.json#initiateChartRequest
+  - openapi/moxe-health-claim-management-initiate-openapi.json#initiateClaimManagementRequest
+- status: 404
+  title: Request not found
+  description: >-
+    A request with the given moxeRequestId could not be found. This means either you are not
+    authorized to access the request or it does not exist.
+  source_operations:
+  - openapi/moxe-health-chart-retrieval-status-openapi.json#getChartRequestStatus
+  - openapi/moxe-health-claim-management-status-openapi.json#getClaimManagementRequestStatus
+- status: 429
+  title: Too many requests
+  description: API rate limit reached (rate limit applies to the whole API).
+  remediation: Back off and retry; no numeric limit or rate-limit headers are published.
+  source_operations:
+  - openapi/moxe-health-chart-retrieval-initiate-openapi.json#initiateChartRequest
+  - openapi/moxe-health-chart-retrieval-status-openapi.json#getChartRequestStatus
+  - openapi/moxe-health-claim-management-initiate-openapi.json#initiateClaimManagementRequest
+  - openapi/moxe-health-claim-management-status-openapi.json#getClaimManagementRequestStatus
+- status: 500
+  title: Internal server error
+  description: The request was valid, but an unexpected error occurred on the server.
+  source_operations:
+  - openapi/moxe-health-chart-retrieval-initiate-openapi.json#initiateChartRequest
+  - openapi/moxe-health-chart-retrieval-status-openapi.json#getChartRequestStatus
+  - openapi/moxe-health-claim-management-initiate-openapi.json#initiateClaimManagementRequest
+  - openapi/moxe-health-claim-management-status-openapi.json#getClaimManagementRequestStatus

@@ -1,0 +1,11 @@
+generated: '2026-07-24'
+method: generated
+skills:
+- file: moxe-health-request-patient-chart.md
+  name: Request a patient chart from Moxe Health
+  api: openapi/moxe-health-chart-retrieval-initiate-openapi.json
+  operations: [initiateChartRequest, getChartRequestStatus]
+- file: moxe-health-request-claim-chart.md
+  name: Request a claim-supporting chart from Moxe Health
+  api: openapi/moxe-health-claim-management-initiate-openapi.json
+  operations: [initiateClaimManagementRequest, getClaimManagementRequestStatus]

@@ -1,0 +1,77 @@
+generated: '2026-07-24'
+method: generated
+source: openapi/moxe-health-chart-retrieval-initiate-openapi.json, openapi/moxe-health-chart-retrieval-status-openapi.json,
+  openapi/moxe-health-claim-management-initiate-openapi.json, openapi/moxe-health-claim-management-status-openapi.json
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 4
+  by_action_class:
+    acting: 2
+    connected: 2
+  by_consequence:
+    write: 2
+    read: 2
+  human_in_the_loop_required: 0
+operations:
+- path: /v1/patient-chart-request
+  method: post
+  operationId: initiateChartRequest
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:patient-chart-request
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/patient-chart-request/{moxeRequestId}/status
+  method: get
+  operationId: getChartRequestStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:patient-chart-request
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/claim-management-request
+  method: post
+  operationId: initiateClaimManagementRequest
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:claim-management-request
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/claim-management-request/{moxeRequestId}/status
+  method: get
+  operationId: getClaimManagementRequestStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:claim-management-request
+    token:
+      max-ttl: 3600
+    audit: none

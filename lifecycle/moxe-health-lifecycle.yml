@@ -1,0 +1,20 @@
+generated: '2026-07-24'
+method: searched
+source: https://developer.moxehealth.com/docs/getting-started, openapi/*
+versioning:
+  scheme: uri-path
+  current: v1
+  spec_version: 0.1.0
+  note: >-
+    Paths are prefixed /v1/. The provider states in getting-started that a formal versioning
+    policy and a sandbox are "coming soon" — neither is published yet.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No deprecation policy or RFC 8594 Sunset/Deprecation header support is published.
+sla:
+  url: null
+  uptime_target: null
+status_page: null
+status_page_note: No public status page found (status.moxehealth.com does not resolve).
+deprecated_operations: []

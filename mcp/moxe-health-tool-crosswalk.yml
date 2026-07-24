@@ -1,0 +1,50 @@
+generated: '2026-07-24'
+method: derived
+source: mcp/moxe-health-mcp.yml, openapi/*
+note: >-
+  Binds each candidate MCP tool to its backing OpenAPI operation. The MCP server is a derived
+  candidate (no live hosted server), so every tool maps 1:1 to a real REST operation and inherits
+  that operation's parameters + requestBody as its inputSchema. No GraphQL surface exists.
+crosswalk:
+- tool: initiate_chart_request
+  category: chart-retrieval
+  rest:
+  - initiateChartRequest
+  binding: rest
+  confidence: high
+- tool: get_chart_request_status
+  category: chart-retrieval
+  rest:
+  - getChartRequestStatus
+  binding: rest
+  confidence: high
+- tool: initiate_claim_management_request
+  category: claim-management
+  rest:
+  - initiateClaimManagementRequest
+  binding: rest
+  confidence: high
+- tool: get_claim_management_request_status
+  category: claim-management
+  rest:
+  - getClaimManagementRequestStatus
+  binding: rest
+  confidence: high
+mcp_only: []
+rest_only: []
+surfaces:
+  openapi:
+  - openapi/moxe-health-chart-retrieval-initiate-openapi.json
+  - openapi/moxe-health-chart-retrieval-status-openapi.json
+  - openapi/moxe-health-claim-management-initiate-openapi.json
+  - openapi/moxe-health-claim-management-status-openapi.json
+  graphql: null
+  mcp:
+    url: null
+    status: candidate (no live hosted server)
+coverage:
+  tools_named: 4
+  tools_bound: 4
+  mcp_only: 0
+  rest_ops_total: 4
+  rest_ops_with_tool: 4

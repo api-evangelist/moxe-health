@@ -1,0 +1,16 @@
+generated: '2026-07-24'
+method: searched
+probe: true
+source: https://moxehealth.com/security
+url: https://moxehealth.com/security
+certifications:
+- SOC 2
+- HIPAA
+- GDPR
+evidence:
+- source: https://moxehealth.com/security
+  keywords:
+  - soc 2
+  - soc2
+  - hipaa
+  - gdpr

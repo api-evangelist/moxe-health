@@ -1,0 +1,11 @@
+generated: '2026-07-24'
+method: derived
+workflows:
+- file: moxe-health-request-patient-chart.yml
+  workflowId: requestPatientChart
+  title: Request a patient chart and poll for status
+  summary: Initiate a release-of-information request for a patient's clinical chart, then poll status by moxeRequestId.
+- file: moxe-health-request-claim-chart.yml
+  workflowId: requestClaimChart
+  title: Request a claim-supporting chart and poll for status
+  summary: Initiate a claim-management request to retrieve the chart supporting a claim, then poll status by moxeRequestId.

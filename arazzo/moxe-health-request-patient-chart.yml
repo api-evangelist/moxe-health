@@ -1,0 +1,82 @@
+arazzo: 1.0.1
+info:
+  title: Request a patient chart and poll for status
+  version: 1.0.0
+  summary: >-
+    Initiate a release-of-information request for a patient's clinical chart, then poll the
+    status endpoint with the returned moxeRequestId until Moxe delivers the chart via SFTP.
+sourceDescriptions:
+- name: chartInitiate
+  url: ../openapi/moxe-health-chart-retrieval-initiate-openapi.json
+  type: openapi
+- name: chartStatus
+  url: ../openapi/moxe-health-chart-retrieval-status-openapi.json
+  type: openapi
+workflows:
+- workflowId: requestPatientChart
+  summary: Initiate a patient chart request and read its status.
+  description: >-
+    Requires a Moxe-issued OAuth2 client-credentials bearer token and x-api-key. Submits member
+    and demographic identifiers plus a date-of-service range, then reads the request status.
+  inputs:
+    type: object
+    required:
+    - RequestId
+    - MemberId
+    - DateOfBirth
+    - FirstName
+    - LastName
+    - AdministrativeGender
+    - PurposeOfUse
+    - RequestSourceId
+    - StartDate
+    - EndDate
+    - ProviderOrganizationId
+    properties:
+      RequestId: {type: string}
+      MemberId: {type: string}
+      DateOfBirth: {type: string}
+      FirstName: {type: string}
+      LastName: {type: string}
+      AdministrativeGender: {type: string}
+      PurposeOfUse: {type: string}
+      RequestSourceId: {type: string}
+      StartDate: {type: string}
+      EndDate: {type: string}
+      ProviderOrganizationId: {type: string}
+  steps:
+  - stepId: initiate
+    description: Submit the patient chart request.
+    operationId: initiateChartRequest
+    requestBody:
+      contentType: application/json
+      payload:
+        RequestId: $inputs.RequestId
+        MemberId: $inputs.MemberId
+        DateOfBirth: $inputs.DateOfBirth
+        FirstName: $inputs.FirstName
+        LastName: $inputs.LastName
+        AdministrativeGender: $inputs.AdministrativeGender
+        PurposeOfUse: $inputs.PurposeOfUse
+        RequestSourceId: $inputs.RequestSourceId
+        StartDate: $inputs.StartDate
+        EndDate: $inputs.EndDate
+        ProviderOrganizationId: $inputs.ProviderOrganizationId
+    successCriteria:
+    - condition: $statusCode == 202
+    outputs:
+      moxeRequestId: $response.body#/data/moxeRequestId
+  - stepId: checkStatus
+    description: Poll the status of the request using the moxeRequestId.
+    operationId: getChartRequestStatus
+    parameters:
+    - name: moxeRequestId
+      in: path
+      value: $steps.initiate.outputs.moxeRequestId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      requestStatusCode: $response.body#/data/requestStatusCode
+  outputs:
+    moxeRequestId: $steps.initiate.outputs.moxeRequestId
+    requestStatusCode: $steps.checkStatus.outputs.requestStatusCode

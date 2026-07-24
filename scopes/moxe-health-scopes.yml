@@ -1,0 +1,50 @@
+generated: '2026-07-24'
+method: derived
+source: openapi/moxe-health-chart-retrieval-initiate-openapi.json, openapi/moxe-health-chart-retrieval-status-openapi.json,
+  openapi/moxe-health-claim-management-initiate-openapi.json, openapi/moxe-health-claim-management-status-openapi.json
+schemes:
+- name: moxe_auth
+  source: openapi/moxe-health-chart-retrieval-initiate-openapi.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://${environment}-api.moxehealth.com/oauth/token
+- name: moxe_auth
+  source: openapi/moxe-health-chart-retrieval-status-openapi.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://${environment}-api.moxehealth.com/oauth/token
+- name: moxe_auth
+  source: openapi/moxe-health-claim-management-initiate-openapi.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://${environment}-api.moxehealth.com/oauth/token
+- name: moxe_auth
+  source: openapi/moxe-health-claim-management-status-openapi.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://${environment}-api.moxehealth.com/oauth/token
+scopes:
+- scope: read:claim-management-request
+  sources:
+  - openapi/moxe-health-claim-management-status-openapi.json
+- scope: read:patient-chart-request
+  description: get information on existing transactions
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/moxe-health-chart-retrieval-initiate-openapi.json
+  - openapi/moxe-health-chart-retrieval-status-openapi.json
+  - openapi/moxe-health-claim-management-initiate-openapi.json
+  - openapi/moxe-health-claim-management-status-openapi.json
+- scope: write:claim-management-request
+  sources:
+  - openapi/moxe-health-claim-management-initiate-openapi.json
+- scope: write:patient-chart-request
+  description: create patient chart transactions
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/moxe-health-chart-retrieval-initiate-openapi.json
+  - openapi/moxe-health-chart-retrieval-status-openapi.json
+  - openapi/moxe-health-claim-management-initiate-openapi.json
+  - openapi/moxe-health-claim-management-status-openapi.json

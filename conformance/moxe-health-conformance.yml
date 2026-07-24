@@ -1,0 +1,44 @@
+generated: '2026-07-24'
+method: searched
+source: https://moxehealth.com/security/, https://developer.moxehealth.com/docs/authentication, openapi/*
+standards:
+- id: oauth2
+  conforms: true
+  evidence: OpenAPI securitySchemes declare an oauth2 clientCredentials flow (moxe_auth).
+- id: oidc
+  conforms: false
+  evidence: No openIdConnect scheme and no /.well-known/openid-configuration (probed 403/404).
+- id: fhir-r4
+  conforms: false
+  evidence: >-
+    Surface is plain REST/JSON, not HL7 FHIR. No CapabilityStatement (/metadata) and no
+    SMART-on-FHIR /.well-known/smart-configuration (probed 404). Confirmed in review.yml.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors are bare HTTP status codes with descriptions; no application/problem+json.
+- id: pagination
+  conforms: false
+  evidence: No collection/list endpoints; single request/status resources only.
+- id: idempotency
+  conforms: false
+  evidence: Customer RequestId is explicitly non-unique; no idempotency-key contract.
+- id: rate-limiting
+  conforms: true
+  evidence: Documented global rate limit with HTTP 429 response (no published numeric limits).
+- id: hipaa
+  conforms: true
+  evidence: HIPAA Security Rule compliance stated on https://moxehealth.com/security/.
+- id: soc2-type2
+  conforms: true
+  evidence: SOC 2 Type 2 (SSAE 16), audited annually, stated on https://moxehealth.com/security/.
+- id: gdpr
+  conforms: true
+  evidence: GDPR referenced in Moxe security/trust posture.
+compliance_program:
+  url: https://moxehealth.com/security/
+  certifications:
+  - SOC 2 Type 2
+  - HIPAA
+  - GDPR
+  recognition: Ranked #1 Best in KLAS for Payer-Provider Data Exchange.
+  encryption: AES-256 at rest, TLS 1.2+ in transit; MFA on portal access.

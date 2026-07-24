@@ -1,0 +1,64 @@
+generated: '2026-07-24'
+method: searched
+source: https://developer.moxehealth.com/docs/authentication, openapi/*
+summary: >-
+  Cross-cutting request/response semantics for the Moxe Health Chart Retrieval API
+  (which also backs the Claim Management request family). REST/JSON over HTTPS, gated
+  behind partner onboarding. Asynchronous by design: initiate endpoints return 202
+  Accepted with a moxeRequestId and HATEOAS status links; the extracted clinical chart
+  is delivered out-of-band via SFTP to a predetermined location, while the API surfaces
+  only request acceptance and status.
+authentication:
+  style: oauth2-client-credentials + apiKey
+  headers:
+  - "Authentication: Bearer {access_token}"   # non-standard header name (not Authorization)
+  - "x-api-key: {api_key}"
+  token_ttl_seconds: 900
+  docs: https://developer.moxehealth.com/docs/authentication
+  detail: authentication/moxe-health-authentication.yml
+idempotency:
+  supported: false
+  note: >-
+    No idempotency-key contract. The customer-supplied "RequestId" is explicitly documented
+    as NOT required to be unique between requests, so it is a correlation label, not an
+    idempotency key. Moxe assigns its own "moxeRequestId" per accepted request.
+pagination:
+  supported: false
+  note: Single-resource request/status endpoints; no collection listing or pagination.
+async_delivery:
+  model: accept-then-poll-then-SFTP
+  accept_status: 202
+  status_polling: GET /v1/{resource}/{moxeRequestId}/status
+  status_links: HATEOAS links returned in the initiate response data.links[]
+  chart_delivery: SFTP to a predetermined location (out-of-band; not returned on the API)
+request_tracing:
+  customer_correlation_id: RequestId       # echoed back on status as data.requestId
+  moxe_assigned_id: moxeRequestId          # returned on 202, used for status lookups
+versioning:
+  scheme: uri-path
+  current: v1
+  note: >-
+    Paths are prefixed /v1/. Provider states a formal versioning policy and a sandbox are
+    "coming soon" (docs/getting-started); no deprecation or Sunset-header policy is published yet.
+error_envelope:
+  shape: >-
+    Errors are returned as bare HTTP status codes with a human-readable description (no
+    application/problem+json). Success envelopes wrap payloads under a top-level "data"
+    object plus createdDate/createdBy (initiate) or data.requestStatusCode/Description (status).
+  detail: errors/moxe-health-problem-types.yml
+rate_limiting:
+  documented: true
+  scope: whole-api (global)
+  exceeded_status: 429
+  published_limits: null
+  headers: null
+  note: >-
+    Docs state "We impose a rate limit for the whole api. If the rate limit is reached, the
+    client will receive HTTP 429 Too Many Requests." No numeric limits or rate-limit response
+    headers are published.
+cross_links:
+  authentication: authentication/moxe-health-authentication.yml
+  scopes: scopes/moxe-health-scopes.yml
+  errors: errors/moxe-health-problem-types.yml
+  lifecycle: lifecycle/moxe-health-lifecycle.yml
+  data_model: data-model/moxe-health-data-model.yml

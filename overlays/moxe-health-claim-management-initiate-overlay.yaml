@@ -1,0 +1,17 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Moxe Health Claim Management (Initiate Claim Request)
+  version: 1.0.0
+extends: openapi/moxe-health-claim-management-initiate-openapi.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enrichment:
+      auth: OAuth2 client-credentials (15-min token) + x-api-key header; partner-onboarded.
+      use_case: Retrieve the clinical chart supporting a specific claim (payment integrity, denials).
+      async_model: 202 Accepted then poll /status; chart delivered via SFTP out-of-band.
+- target: $.paths['/v1/claim-management-request'].post
+  update:
+    x-apievangelist-notes: >-
+      Initiates a claim-management request. Requires subscriber/patient identifiers, a VisitId,
+      ClaimId, and DenialRemarkCode in addition to demographics and date-of-service range.

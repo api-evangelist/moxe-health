@@ -1,0 +1,75 @@
+generated: '2026-07-24'
+method: derived
+source: openapi/*
+entities:
+- name: PatientChartRequest
+  api: Chart Retrieval
+  created_by: openapi/moxe-health-chart-retrieval-initiate-openapi.json#initiateChartRequest
+  key_fields:
+  - RequestId          # customer-generated correlation id (non-unique)
+  - moxeRequestId      # Moxe-assigned unique id (returned on 202)
+  - MemberId
+  - ProviderOrganizationId
+  - StartDate
+  - EndDate
+  identifiers:
+  - MemberId
+  - TIN
+- name: ClaimManagementRequest
+  api: Claim Management
+  created_by: openapi/moxe-health-claim-management-initiate-openapi.json#initiateClaimManagementRequest
+  key_fields:
+  - RequestId
+  - moxeRequestId
+  - SubscriberId
+  - PatientId
+  - VisitId
+  - ClaimId
+  - DenialRemarkCode
+  - ProviderOrganizationId
+  identifiers:
+  - SubscriberId
+  - PatientId
+  - ClaimId
+  - ProviderNpi
+  - GroupNpi
+  - TaxId
+- name: RequestStatus
+  api: Chart Retrieval / Claim Management
+  read_by:
+  - openapi/moxe-health-chart-retrieval-status-openapi.json#getChartRequestStatus
+  - openapi/moxe-health-claim-management-status-openapi.json#getClaimManagementRequestStatus
+  key_fields:
+  - moxeRequestId
+  - requestId
+  - requestStatusCode
+  - requestStatusDescription
+  - requestStatusDateTime
+- name: Link
+  api: shared
+  embedded_in:
+  - PatientChartRequestResponse
+  key_fields:
+  - href
+  - method
+relationships:
+- from: PatientChartRequest
+  to: RequestStatus
+  type: has_one
+  via: moxeRequestId
+- from: PatientChartRequest
+  to: Link
+  type: has_many
+  via: data.links
+- from: ClaimManagementRequest
+  to: RequestStatus
+  type: has_one
+  via: moxeRequestId
+- from: ClaimManagementRequest
+  to: Link
+  type: has_many
+  via: data.links
+notes: >-
+  Both request families share the same response envelope (patientChartRequestResponse: data.moxeRequestId
+  + data.links[] HATEOAS links) and the same status shape (data.requestStatusCode/Description/DateTime).
+  The extracted clinical chart itself is not a REST resource — it is delivered out-of-band via SFTP.

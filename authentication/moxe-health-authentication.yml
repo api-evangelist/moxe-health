@@ -1,0 +1,47 @@
+generated: '2026-07-24'
+method: searched
+source: openapi/moxe-health-chart-retrieval-initiate-openapi.json, openapi/moxe-health-chart-retrieval-status-openapi.json,
+  openapi/moxe-health-claim-management-initiate-openapi.json, openapi/moxe-health-claim-management-status-openapi.json
+docs: https://developer.moxehealth.com/docs/authentication
+summary:
+  types:
+  - oauth2
+  - apiKey
+  oauth2_flows:
+  - clientCredentials
+  api_key_in:
+  - header
+notes: >-
+  Every request must present TWO credentials issued by Moxe during partner onboarding:
+  (1) an OAuth2 client-credentials bearer access token, and (2) a static API key. The
+  bearer token is obtained from a Moxe-provided token endpoint by POSTing grant_type=client_credentials
+  with client_id, client_secret, and an audience value (all provided by Moxe). The token
+  response returns access_token, token_type=Bearer, and expires_in=900 (15 minutes). The
+  token is then sent on API calls in a NON-STANDARD header named "Authentication: Bearer
+  {access_token}" (not the conventional "Authorization" header), alongside "x-api-key:
+  {api_key}". The OpenAPI additionally declares a custom API Gateway request authorizer
+  ("${environment}-chart-retrieval-api-authorizer"). Credentials are not self-serve; they
+  are granted only under a partner onboarding agreement.
+schemes:
+- name: moxe_auth
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://${environment}-api.moxehealth.com/oauth/token
+    scopes: 2
+    token_ttl_seconds: 900
+    audience_required: true
+  sources:
+  - openapi/moxe-health-chart-retrieval-initiate-openapi.json
+  - openapi/moxe-health-chart-retrieval-status-openapi.json
+  - openapi/moxe-health-claim-management-initiate-openapi.json
+  - openapi/moxe-health-claim-management-status-openapi.json
+- name: x-api-key
+  type: apiKey
+  in: header
+  parameter_name: x-api-key
+  sources:
+  - openapi/moxe-health-chart-retrieval-initiate-openapi.json
+  - openapi/moxe-health-chart-retrieval-status-openapi.json
+  - openapi/moxe-health-claim-management-initiate-openapi.json
+  - openapi/moxe-health-claim-management-status-openapi.json

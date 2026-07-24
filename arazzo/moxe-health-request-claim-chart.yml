@@ -1,0 +1,97 @@
+arazzo: 1.0.1
+info:
+  title: Request a claim-supporting chart and poll for status
+  version: 1.0.0
+  summary: >-
+    Initiate a claim-management request to retrieve the clinical chart supporting a specific
+    claim, then poll the status endpoint with the returned moxeRequestId.
+sourceDescriptions:
+- name: claimInitiate
+  url: ../openapi/moxe-health-claim-management-initiate-openapi.json
+  type: openapi
+- name: claimStatus
+  url: ../openapi/moxe-health-claim-management-status-openapi.json
+  type: openapi
+workflows:
+- workflowId: requestClaimChart
+  summary: Initiate a claim-management request and read its status.
+  description: >-
+    Requires a Moxe-issued OAuth2 client-credentials bearer token and x-api-key. Submits
+    subscriber/patient identifiers, a VisitId, ClaimId, and DenialRemarkCode, then reads status.
+  inputs:
+    type: object
+    required:
+    - RequestId
+    - SubscriberId
+    - PatientId
+    - PatientIdType
+    - DateOfBirth
+    - FirstName
+    - LastName
+    - AdministrativeGender
+    - VisitId
+    - PurposeOfUse
+    - RequestSourceId
+    - StartDate
+    - EndDate
+    - ClaimId
+    - DenialRemarkCode
+    - ProviderOrganizationId
+    properties:
+      RequestId: {type: string}
+      SubscriberId: {type: string}
+      PatientId: {type: string}
+      PatientIdType: {type: string}
+      DateOfBirth: {type: string}
+      FirstName: {type: string}
+      LastName: {type: string}
+      AdministrativeGender: {type: string}
+      VisitId: {type: string}
+      PurposeOfUse: {type: string}
+      RequestSourceId: {type: string}
+      StartDate: {type: string}
+      EndDate: {type: string}
+      ClaimId: {type: string}
+      DenialRemarkCode: {type: string}
+      ProviderOrganizationId: {type: string}
+  steps:
+  - stepId: initiate
+    description: Submit the claim-management request.
+    operationId: initiateClaimManagementRequest
+    requestBody:
+      contentType: application/json
+      payload:
+        RequestId: $inputs.RequestId
+        SubscriberId: $inputs.SubscriberId
+        PatientId: $inputs.PatientId
+        PatientIdType: $inputs.PatientIdType
+        DateOfBirth: $inputs.DateOfBirth
+        FirstName: $inputs.FirstName
+        LastName: $inputs.LastName
+        AdministrativeGender: $inputs.AdministrativeGender
+        VisitId: $inputs.VisitId
+        PurposeOfUse: $inputs.PurposeOfUse
+        RequestSourceId: $inputs.RequestSourceId
+        StartDate: $inputs.StartDate
+        EndDate: $inputs.EndDate
+        ClaimId: $inputs.ClaimId
+        DenialRemarkCode: $inputs.DenialRemarkCode
+        ProviderOrganizationId: $inputs.ProviderOrganizationId
+    successCriteria:
+    - condition: $statusCode == 202
+    outputs:
+      moxeRequestId: $response.body#/data/moxeRequestId
+  - stepId: checkStatus
+    description: Poll the status of the claim-management request using the moxeRequestId.
+    operationId: getClaimManagementRequestStatus
+    parameters:
+    - name: moxeRequestId
+      in: path
+      value: $steps.initiate.outputs.moxeRequestId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      requestStatusCode: $response.body#/data/requestStatusCode
+  outputs:
+    moxeRequestId: $steps.initiate.outputs.moxeRequestId
+    requestStatusCode: $steps.checkStatus.outputs.requestStatusCode

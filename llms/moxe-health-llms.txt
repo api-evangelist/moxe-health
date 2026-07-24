@@ -1,0 +1,17 @@
+# Moxe Docs Documentation
+
+> Documentation for Moxe Docs
+
+## Guides
+- [Introduction](https://moxe-docs.readme.io/docs/getting-started.md): Moxe’s powerful APIs are easy to use and can support a range of healthcare use cases. Learn more about how our APIs can work for you.
+- [Authentication](https://moxe-docs.readme.io/docs/authentication.md)
+- [Privacy and Security](https://moxe-docs.readme.io/docs/privacy-and-security.md)
+- [HIPAA Compliance](https://moxe-docs.readme.io/docs/hipaa-compliance.md)
+
+## API Reference
+- [Overview](https://moxe-docs.readme.io/reference/overview.md)
+- [Request Source IDs](https://moxe-docs.readme.io/reference/request-source-ids.md): The list of acceptable values for the RequestSourceId parameter
+- [Initiate Request](https://moxe-docs.readme.io/reference/initiatechartrequest.md): Initiate a new request for patient data
+- [Get Status](https://moxe-docs.readme.io/reference/getchartrequeststatus.md): Get the status of the specified patient chart request
+- [Initiate Claim Request](https://moxe-docs.readme.io/reference/initiateclaimmanagementrequest.md): Initiate a new request for claim management
+- [Get Claim Status](https://moxe-docs.readme.io/reference/getclaimmanagementrequeststatus.md): Get the status of the specified claim management request

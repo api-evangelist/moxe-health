@@ -1,0 +1,26 @@
+generated: '2026-07-24'
+method: derived
+status: candidate
+source: openapi/*
+note: >-
+  No official hosted/remote MCP server was found for Moxe Health (no docs mention, no registry
+  entry). This is a DERIVED candidate tool list — one tool per OpenAPI operation — to model how
+  the Chart Retrieval / Claim Management surface would expose as MCP tools. Each tool inherits its
+  real inputSchema from the backing operation's parameters + requestBody. Not a live server.
+server:
+  name: moxe-health
+  transport: http
+  url: null
+tools:
+- name: initiate_chart_request
+  description: Initiate a new release-of-information request for a patient's clinical chart.
+  source_operation: openapi/moxe-health-chart-retrieval-initiate-openapi.json#initiateChartRequest
+- name: get_chart_request_status
+  description: Get the status of a previously initiated patient chart request by moxeRequestId.
+  source_operation: openapi/moxe-health-chart-retrieval-status-openapi.json#getChartRequestStatus
+- name: initiate_claim_management_request
+  description: Initiate a new claim-management request to retrieve the chart supporting a specific claim.
+  source_operation: openapi/moxe-health-claim-management-initiate-openapi.json#initiateClaimManagementRequest
+- name: get_claim_management_request_status
+  description: Get the status of a previously initiated claim-management request by moxeRequestId.
+  source_operation: openapi/moxe-health-claim-management-status-openapi.json#getClaimManagementRequestStatus

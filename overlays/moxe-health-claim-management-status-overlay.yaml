@@ -1,0 +1,16 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Moxe Health Claim Management (Get Claim Status)
+  version: 1.0.0
+extends: openapi/moxe-health-claim-management-status-openapi.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enrichment:
+      auth: OAuth2 client-credentials (15-min token) + x-api-key header; partner-onboarded.
+      polling: Poll with the moxeRequestId returned by the initiate call; read requestStatusCode.
+- target: $.paths['/v1/claim-management-request/{moxeRequestId}/status'].get
+  update:
+    x-apievangelist-notes: >-
+      Returns the current status of a claim-management request. A 404 means the request is not
+      found OR the caller is not authorized to view it.

@@ -30,7 +30,7 @@ tags:
 - Claims
 - Risk Adjustment
 created: '2026-07-24'
-modified: '2026-07-24'
+modified: '2026-07-24T12:00:00Z'
 specificationVersion: '0.19'
 apis:
 - aid: moxe-health:moxe-health-chart-retrieval-api
@@ -87,6 +87,52 @@ apis:
   - type: Authentication
     url: https://developer.moxehealth.com/docs/authentication
 common:
+- type: TrustCenter
+  url: security/moxe-health-trust-center.yml
+- type: DomainSecurity
+  url: security/moxe-health-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/moxe-health-agentic-access.yml
+- type: OAuthScopes
+  url: scopes/moxe-health-scopes.yml
+- type: Authentication
+  url: authentication/moxe-health-authentication.yml
+- type: Conventions
+  url: conventions/moxe-health-conventions.yml
+- type: ErrorCatalog
+  url: errors/moxe-health-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/moxe-health-lifecycle.yml
+- type: Conformance
+  url: conformance/moxe-health-conformance.yml
+- type: Compliance
+  url: https://moxehealth.com/security/
+- type: DataModel
+  url: data-model/moxe-health-data-model.yml
+- type: MCPServer
+  url: mcp/moxe-health-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/moxe-health-tool-crosswalk.yml
+- type: VulnerabilityDisclosure
+  url: security/moxe-health-vulnerability-disclosure.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Arazzo
+  name: Request a patient chart and poll for status
+  url: arazzo/moxe-health-request-patient-chart.yml
+- type: Arazzo
+  name: Request a claim-supporting chart and poll for status
+  url: arazzo/moxe-health-request-claim-chart.yml
+- type: Overlay
+  url: overlays/moxe-health-chart-retrieval-initiate-overlay.yaml
+- type: Overlay
+  url: overlays/moxe-health-chart-retrieval-status-overlay.yaml
+- type: Overlay
+  url: overlays/moxe-health-claim-management-initiate-overlay.yaml
+- type: Overlay
+  url: overlays/moxe-health-claim-management-status-overlay.yaml
+- type: LLMsTxt
+  url: llms/moxe-health-llms.txt
 - type: Website
   url: https://moxehealth.com/
 - type: DeveloperPortal
