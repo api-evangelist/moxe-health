@@ -41,7 +41,8 @@ surfaces:
   graphql: null
   mcp:
     url: null
-    status: candidate (no live hosted server)
+    status: candidate
+    status_raw: candidate
 coverage:
   tools_named: 4
   tools_bound: 4
