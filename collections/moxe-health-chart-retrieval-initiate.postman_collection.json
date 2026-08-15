@@ -1,0 +1,389 @@
+{
+  "item": [
+    {
+      "id": "f9c27880-997b-4fd8-b950-9f2ef2300c9e",
+      "name": "Patient",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7a50f00a-f6ce-4e3b-bdbf-08387ca3fb33",
+          "name": "Initiate Request",
+          "request": {
+            "name": "Initiate Request",
+            "description": {
+              "content": "Initiate a new request for patient data",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "patient-chart-request"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "write:patient-chart-request read:patient-chart-request"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://${environment}-api.moxehealth.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"RequestId\": \"<string>\",\n  \"MemberId\": \"<string>\",\n  \"DateOfBirth\": \"<string>\",\n  \"FirstName\": \"<string>\",\n  \"LastName\": \"<string>\",\n  \"AdministrativeGender\": \"<string>\",\n  \"PurposeOfUse\": \"<string>\",\n  \"RequestSourceId\": \"<string>\",\n  \"StartDate\": \"<string>\",\n  \"EndDate\": \"<string>\",\n  \"ProviderOrganizationId\": \"<string>\",\n  \"MiddleName\": \"<string>\",\n  \"Address1\": \"<string>\",\n  \"Address2\": \"<string>\",\n  \"City\": \"<string>\",\n  \"State\": \"<string>\",\n  \"Zip\": \"<string>\",\n  \"TIN\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "66493a42-f703-4718-8ee3-905604924a2a",
+              "name": "Chart request was accepted but processing has not necessarily begun",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patient-chart-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"RequestId\": \"<string>\",\n  \"MemberId\": \"<string>\",\n  \"DateOfBirth\": \"<string>\",\n  \"FirstName\": \"<string>\",\n  \"LastName\": \"<string>\",\n  \"AdministrativeGender\": \"<string>\",\n  \"PurposeOfUse\": \"<string>\",\n  \"RequestSourceId\": \"<string>\",\n  \"StartDate\": \"<string>\",\n  \"EndDate\": \"<string>\",\n  \"ProviderOrganizationId\": \"<string>\",\n  \"MiddleName\": \"<string>\",\n  \"Address1\": \"<string>\",\n  \"Address2\": \"<string>\",\n  \"City\": \"<string>\",\n  \"State\": \"<string>\",\n  \"Zip\": \"<string>\",\n  \"TIN\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"moxeRequestId\": \"string\",\n    \"links\": [\n      {\n        \"href\": \"string\",\n        \"method\": \"string\"\n      },\n      {\n        \"href\": \"string\",\n        \"method\": \"string\"\n      }\n    ]\n  },\n  \"createdDate\": \"2016-01-03T19:41:51.416Z\",\n  \"createdBy\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef5b50e8-cc3a-4dae-b815-7f778aa1034f",
+              "name": "Invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patient-chart-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"RequestId\": \"<string>\",\n  \"MemberId\": \"<string>\",\n  \"DateOfBirth\": \"<string>\",\n  \"FirstName\": \"<string>\",\n  \"LastName\": \"<string>\",\n  \"AdministrativeGender\": \"<string>\",\n  \"PurposeOfUse\": \"<string>\",\n  \"RequestSourceId\": \"<string>\",\n  \"StartDate\": \"<string>\",\n  \"EndDate\": \"<string>\",\n  \"ProviderOrganizationId\": \"<string>\",\n  \"MiddleName\": \"<string>\",\n  \"Address1\": \"<string>\",\n  \"Address2\": \"<string>\",\n  \"City\": \"<string>\",\n  \"State\": \"<string>\",\n  \"Zip\": \"<string>\",\n  \"TIN\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b6dc265d-27fa-4efa-8f55-ad3b6d357bb1",
+              "name": "The user or app initiating the request was not authenticated. Reauthenticate and try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patient-chart-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"RequestId\": \"<string>\",\n  \"MemberId\": \"<string>\",\n  \"DateOfBirth\": \"<string>\",\n  \"FirstName\": \"<string>\",\n  \"LastName\": \"<string>\",\n  \"AdministrativeGender\": \"<string>\",\n  \"PurposeOfUse\": \"<string>\",\n  \"RequestSourceId\": \"<string>\",\n  \"StartDate\": \"<string>\",\n  \"EndDate\": \"<string>\",\n  \"ProviderOrganizationId\": \"<string>\",\n  \"MiddleName\": \"<string>\",\n  \"Address1\": \"<string>\",\n  \"Address2\": \"<string>\",\n  \"City\": \"<string>\",\n  \"State\": \"<string>\",\n  \"Zip\": \"<string>\",\n  \"TIN\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1be1851a-be55-4bb9-8913-842c4f7b6c7a",
+              "name": "The user or app does not have the appropriate permissions to make this request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patient-chart-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"RequestId\": \"<string>\",\n  \"MemberId\": \"<string>\",\n  \"DateOfBirth\": \"<string>\",\n  \"FirstName\": \"<string>\",\n  \"LastName\": \"<string>\",\n  \"AdministrativeGender\": \"<string>\",\n  \"PurposeOfUse\": \"<string>\",\n  \"RequestSourceId\": \"<string>\",\n  \"StartDate\": \"<string>\",\n  \"EndDate\": \"<string>\",\n  \"ProviderOrganizationId\": \"<string>\",\n  \"MiddleName\": \"<string>\",\n  \"Address1\": \"<string>\",\n  \"Address2\": \"<string>\",\n  \"City\": \"<string>\",\n  \"State\": \"<string>\",\n  \"Zip\": \"<string>\",\n  \"TIN\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "86d09dcf-5d9b-4a41-8821-2a30082d612d",
+              "name": "Too many requests. API rate limit reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patient-chart-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"RequestId\": \"<string>\",\n  \"MemberId\": \"<string>\",\n  \"DateOfBirth\": \"<string>\",\n  \"FirstName\": \"<string>\",\n  \"LastName\": \"<string>\",\n  \"AdministrativeGender\": \"<string>\",\n  \"PurposeOfUse\": \"<string>\",\n  \"RequestSourceId\": \"<string>\",\n  \"StartDate\": \"<string>\",\n  \"EndDate\": \"<string>\",\n  \"ProviderOrganizationId\": \"<string>\",\n  \"MiddleName\": \"<string>\",\n  \"Address1\": \"<string>\",\n  \"Address2\": \"<string>\",\n  \"City\": \"<string>\",\n  \"State\": \"<string>\",\n  \"Zip\": \"<string>\",\n  \"TIN\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f35c0313-fcf7-42dc-b7cc-c20b8c09399f",
+              "name": "The request was valid, but an unexpected error occured on the server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patient-chart-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"RequestId\": \"<string>\",\n  \"MemberId\": \"<string>\",\n  \"DateOfBirth\": \"<string>\",\n  \"FirstName\": \"<string>\",\n  \"LastName\": \"<string>\",\n  \"AdministrativeGender\": \"<string>\",\n  \"PurposeOfUse\": \"<string>\",\n  \"RequestSourceId\": \"<string>\",\n  \"StartDate\": \"<string>\",\n  \"EndDate\": \"<string>\",\n  \"ProviderOrganizationId\": \"<string>\",\n  \"MiddleName\": \"<string>\",\n  \"Address1\": \"<string>\",\n  \"Address2\": \"<string>\",\n  \"City\": \"<string>\",\n  \"State\": \"<string>\",\n  \"Zip\": \"<string>\",\n  \"TIN\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://${{environment}}-api.moxehealth.com/chart-retrieval",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1be3e923-e89f-45ed-9922-3a8d67aa29eb",
+    "name": "Chart Retrieval API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "In order to use this api, we require each request gets sent with an api key in the named header, \"x-api-key\". <br><br> We impose a rate limit for the whole api. If the rate limit is reached, the client will receive the response, \"HTTP 429 Too Many Requests\".",
+      "type": "text/plain"
+    }
+  }
+}

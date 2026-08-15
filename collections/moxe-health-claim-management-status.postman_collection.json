@@ -1,0 +1,348 @@
+{
+  "item": [
+    {
+      "id": "403c3e1b-5b70-43a4-a2e2-41926d2a372e",
+      "name": "Claims",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "75e8dd7d-ed24-4596-9657-853759bff9e0",
+          "name": "Get Claim Status",
+          "request": {
+            "name": "Get Claim Status",
+            "description": {
+              "content": "Get the status of the specified claim management request",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "claim-management-request",
+                ":moxeRequestId",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "moxeRequestId",
+                  "description": "(Required) The moxeRequestId provided by us when the claim-management-request in question was created"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "write:patient-chart-request read:patient-chart-request"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://${environment}-api.moxehealth.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ac07f8af-7d94-42ae-b123-aa0149b046ff",
+              "name": "Successfully determined the status of the given request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "claim-management-request",
+                    ":moxeRequestId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "moxeRequestId",
+                      "description": "(Required) The moxeRequestId provided by us when the claim-management-request in question was created"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"requestId\": \"string\",\n    \"moxeRequestId\": \"string\",\n    \"requestStatusCode\": \"string\",\n    \"requestStatusDescription\": \"string\",\n    \"requestStatusDateTime\": \"1994-04-30T11:27:31.008Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c414db49-9f29-4d04-8d8e-228528339560",
+              "name": "The user or app initiating the request was not authenticated. Reauthenticate and try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "claim-management-request",
+                    ":moxeRequestId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "moxeRequestId",
+                      "description": "(Required) The moxeRequestId provided by us when the claim-management-request in question was created"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2c0e58f1-ef42-47d6-bad7-e577d3fc02c3",
+              "name": "A claim management request with the given moxeRequestId could not be found. This means that either you are not authorized to access the request or it does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "claim-management-request",
+                    ":moxeRequestId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "moxeRequestId",
+                      "description": "(Required) The moxeRequestId provided by us when the claim-management-request in question was created"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a8541850-03de-4e41-bc31-ef5aa7ab949e",
+              "name": "Too many requests. API rate limit reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "claim-management-request",
+                    ":moxeRequestId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "moxeRequestId",
+                      "description": "(Required) The moxeRequestId provided by us when the claim-management-request in question was created"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3e57cebf-7559-409b-b359-65f06e07d4db",
+              "name": "The request was valid, but an unexpected error occured on the server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "claim-management-request",
+                    ":moxeRequestId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "moxeRequestId",
+                      "description": "(Required) The moxeRequestId provided by us when the claim-management-request in question was created"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://${{environment}}-api.moxehealth.com/chart-retrieval",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b4b07900-d8e6-4105-ac68-ccb802017732",
+    "name": "Chart Retrieval API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "In order to use this api, we require each request gets sent with an api key in the named header, \"x-api-key\". <br><br> We impose a rate limit for the whole api. If the rate limit is reached, the client will receive the response, \"HTTP 429 Too Many Requests\".",
+      "type": "text/plain"
+    }
+  }
+}

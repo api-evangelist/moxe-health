@@ -1,0 +1,13 @@
+generated: '2026-08-14'
+method: searched
+source: https://moxehealth.com/, https://moxehealth.com/consult/, https://moxehealth.com/contact/
+plan_count: 0
+plans: []
+note: >-
+  Moxe Health publishes no public pricing or plans page. The marketing site's primary
+  call-to-action is "Schedule a Meeting" (/consult/) and a /contact/ page (phone
+  608.669.9176, info@moxehealth.com); no self-serve tier, quota, or list price is
+  published anywhere on the site or developer portal. Access to the Chart Retrieval /
+  Claim Management API is granted only through a partner onboarding agreement after a
+  sales consult (enterprise "contact us" model), consistent with the gated-onboarding
+  posture already recorded in authentication/ and lifecycle/.

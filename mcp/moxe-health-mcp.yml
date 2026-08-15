@@ -2,11 +2,10 @@ generated: '2026-07-24'
 method: derived
 status: candidate
 source: openapi/*
-note: >-
-  No official hosted/remote MCP server was found for Moxe Health (no docs mention, no registry
-  entry). This is a DERIVED candidate tool list — one tool per OpenAPI operation — to model how
-  the Chart Retrieval / Claim Management surface would expose as MCP tools. Each tool inherits its
-  real inputSchema from the backing operation's parameters + requestBody. Not a live server.
+note: No official hosted/remote MCP server was found for Moxe Health (no docs mention, no registry entry).
+  This is a DERIVED candidate tool list — one tool per OpenAPI operation — to model how the Chart Retrieval
+  / Claim Management surface would expose as MCP tools. Each tool inherits its real inputSchema from the
+  backing operation's parameters + requestBody. Not a live server.
 server:
   name: moxe-health
   transport: http
@@ -24,3 +23,9 @@ tools:
 - name: get_claim_management_request_status
   description: Get the status of a previously initiated claim-management request by moxeRequestId.
   source_operation: openapi/moxe-health-claim-management-status-openapi.json#getClaimManagementRequestStatus
+deployment:
+  mode: none
+  verified: derived
+  tools: 4
+  checked: '2026-08-12'
+  source: catalog MCP census

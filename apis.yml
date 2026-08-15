@@ -117,6 +117,12 @@ common:
   url: security/moxe-health-vulnerability-disclosure.yml
 - type: AgentSkill
   url: skills/_index.yml
+- type: Packages
+  url: packages/moxe-health-packages.yml
+- type: Plans
+  url: plans/moxe-health-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/moxe-health-rate-limits.yml
 - type: Arazzo
   name: Request a patient chart and poll for status
   url: arazzo/moxe-health-request-patient-chart.yml
@@ -163,6 +169,11 @@ common:
   url: https://moxehealth.com/contact/
 - type: LLMsTxt
   url: https://developer.moxehealth.com/llms.txt
+x-enrichment:
+  date: '2026-08-14'
+  status: enriched
+  artifacts_added: 3
+  pass: local-v1
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

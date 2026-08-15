@@ -1,0 +1,348 @@
+{
+  "item": [
+    {
+      "id": "dc015a45-6212-4dc6-9085-b8032a93b591",
+      "name": "Patient",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8eb21de8-65d0-4e18-92de-dc9725240299",
+          "name": "Get Status",
+          "request": {
+            "name": "Get Status",
+            "description": {
+              "content": "Get the status of the specified patient chart request",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "patient-chart-request",
+                ":moxeRequestId",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "moxeRequestId",
+                  "description": "(Required) The moxeRequestId provided by us when the patient-chart-request in question was created"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "write:patient-chart-request read:patient-chart-request"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://${environment}-api.moxehealth.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "74ef323f-fb36-4917-bb5a-318c2b4643c7",
+              "name": "Successfully determined the status of the given request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patient-chart-request",
+                    ":moxeRequestId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "moxeRequestId",
+                      "description": "(Required) The moxeRequestId provided by us when the patient-chart-request in question was created"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"requestId\": \"string\",\n    \"moxeRequestId\": \"string\",\n    \"requestStatusCode\": \"string\",\n    \"requestStatusDescription\": \"string\",\n    \"requestStatusDateTime\": \"2003-07-24T07:25:14.451Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "231ed8fe-90a1-4ca1-95b2-6c636de8c25f",
+              "name": "The user or app initiating the request was not authenticated. Reauthenticate and try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patient-chart-request",
+                    ":moxeRequestId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "moxeRequestId",
+                      "description": "(Required) The moxeRequestId provided by us when the patient-chart-request in question was created"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0cb2d89f-d07b-472f-baf3-8eb72ea85e4c",
+              "name": "A patient chart request with the given moxeRequestId could not be found. This means that either you are not authorized to access the request or it does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patient-chart-request",
+                    ":moxeRequestId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "moxeRequestId",
+                      "description": "(Required) The moxeRequestId provided by us when the patient-chart-request in question was created"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f66b5f74-cadb-48dd-8742-1a88f5bf7d64",
+              "name": "Too many requests. API rate limit reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patient-chart-request",
+                    ":moxeRequestId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "moxeRequestId",
+                      "description": "(Required) The moxeRequestId provided by us when the patient-chart-request in question was created"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5755d143-8a1a-4533-9d47-3c9c4b19b102",
+              "name": "The request was valid, but an unexpected error occured on the server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "patient-chart-request",
+                    ":moxeRequestId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "moxeRequestId",
+                      "description": "(Required) The moxeRequestId provided by us when the patient-chart-request in question was created"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://${{environment}}-api.moxehealth.com/chart-retrieval",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bd8c3142-56d2-41b5-a3a5-4cd9a05238bb",
+    "name": "Chart Retrieval API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "In order to use this api, we require each request gets sent with an api key in the named header, \"x-api-key\". <br><br> We impose a rate limit for the whole api. If the rate limit is reached, the client will receive the response, \"HTTP 429 Too Many Requests\".",
+      "type": "text/plain"
+    }
+  }
+}

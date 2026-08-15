@@ -1,0 +1,389 @@
+{
+  "item": [
+    {
+      "id": "adcba514-5ed0-40ab-a40e-c688554a6004",
+      "name": "Claims",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "49db4f39-a7b5-487b-8c04-8f963e2fcafa",
+          "name": "Initiate Claim Request",
+          "request": {
+            "name": "Initiate Claim Request",
+            "description": {
+              "content": "Initiate a new request for claim management",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "claim-management-request"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "write:patient-chart-request read:patient-chart-request"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://${environment}-api.moxehealth.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"RequestId\": \"<string>\",\n  \"SubscriberId\": \"<string>\",\n  \"PatientId\": \"<string>\",\n  \"PatientIdType\": \"<string>\",\n  \"DateOfBirth\": \"<string>\",\n  \"FirstName\": \"<string>\",\n  \"LastName\": \"<string>\",\n  \"AdministrativeGender\": \"<string>\",\n  \"VisitId\": \"<string>\",\n  \"PurposeOfUse\": \"<string>\",\n  \"RequestSourceId\": \"<string>\",\n  \"StartDate\": \"<string>\",\n  \"EndDate\": \"<string>\",\n  \"ClaimId\": \"<string>\",\n  \"DenialRemarkCode\": \"<string>\",\n  \"ProviderOrganizationId\": \"<string>\",\n  \"MemberId\": \"<string>\",\n  \"MiddleName\": \"<string>\",\n  \"Address1\": \"<string>\",\n  \"Address2\": \"<string>\",\n  \"City\": \"<string>\",\n  \"State\": \"<string>\",\n  \"Zip\": \"<string>\",\n  \"PatientAccountNumber\": \"<string>\",\n  \"ProviderNpi\": \"<string>\",\n  \"GroupNpi\": \"<string>\",\n  \"TaxId\": \"<string>\",\n  \"ProcedureCode\": {\n    \"Type\": \"<string>\",\n    \"Category\": \"<string>\",\n    \"Section\": \"<string>\",\n    \"Codes\": \"<array>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "af4afc73-30f0-4268-ae19-fb7466b49854",
+              "name": "Claim Management request was accepted but processing has not necessarily begun",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "claim-management-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"RequestId\": \"<string>\",\n  \"SubscriberId\": \"<string>\",\n  \"PatientId\": \"<string>\",\n  \"PatientIdType\": \"<string>\",\n  \"DateOfBirth\": \"<string>\",\n  \"FirstName\": \"<string>\",\n  \"LastName\": \"<string>\",\n  \"AdministrativeGender\": \"<string>\",\n  \"VisitId\": \"<string>\",\n  \"PurposeOfUse\": \"<string>\",\n  \"RequestSourceId\": \"<string>\",\n  \"StartDate\": \"<string>\",\n  \"EndDate\": \"<string>\",\n  \"ClaimId\": \"<string>\",\n  \"DenialRemarkCode\": \"<string>\",\n  \"ProviderOrganizationId\": \"<string>\",\n  \"MemberId\": \"<string>\",\n  \"MiddleName\": \"<string>\",\n  \"Address1\": \"<string>\",\n  \"Address2\": \"<string>\",\n  \"City\": \"<string>\",\n  \"State\": \"<string>\",\n  \"Zip\": \"<string>\",\n  \"PatientAccountNumber\": \"<string>\",\n  \"ProviderNpi\": \"<string>\",\n  \"GroupNpi\": \"<string>\",\n  \"TaxId\": \"<string>\",\n  \"ProcedureCode\": {\n    \"Type\": \"<string>\",\n    \"Category\": \"<string>\",\n    \"Section\": \"<string>\",\n    \"Codes\": \"<array>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"moxeRequestId\": \"string\",\n    \"links\": [\n      {\n        \"href\": \"string\",\n        \"method\": \"string\"\n      },\n      {\n        \"href\": \"string\",\n        \"method\": \"string\"\n      }\n    ]\n  },\n  \"createdDate\": \"1949-04-13T21:08:55.527Z\",\n  \"createdBy\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a166608-10f9-4867-a4db-d080830d7a47",
+              "name": "Invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "claim-management-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"RequestId\": \"<string>\",\n  \"SubscriberId\": \"<string>\",\n  \"PatientId\": \"<string>\",\n  \"PatientIdType\": \"<string>\",\n  \"DateOfBirth\": \"<string>\",\n  \"FirstName\": \"<string>\",\n  \"LastName\": \"<string>\",\n  \"AdministrativeGender\": \"<string>\",\n  \"VisitId\": \"<string>\",\n  \"PurposeOfUse\": \"<string>\",\n  \"RequestSourceId\": \"<string>\",\n  \"StartDate\": \"<string>\",\n  \"EndDate\": \"<string>\",\n  \"ClaimId\": \"<string>\",\n  \"DenialRemarkCode\": \"<string>\",\n  \"ProviderOrganizationId\": \"<string>\",\n  \"MemberId\": \"<string>\",\n  \"MiddleName\": \"<string>\",\n  \"Address1\": \"<string>\",\n  \"Address2\": \"<string>\",\n  \"City\": \"<string>\",\n  \"State\": \"<string>\",\n  \"Zip\": \"<string>\",\n  \"PatientAccountNumber\": \"<string>\",\n  \"ProviderNpi\": \"<string>\",\n  \"GroupNpi\": \"<string>\",\n  \"TaxId\": \"<string>\",\n  \"ProcedureCode\": {\n    \"Type\": \"<string>\",\n    \"Category\": \"<string>\",\n    \"Section\": \"<string>\",\n    \"Codes\": \"<array>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "554e2a7f-2b69-48fc-b774-4123a93f336c",
+              "name": "The user or app initiating the request was not authenticated. Reauthenticate and try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "claim-management-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"RequestId\": \"<string>\",\n  \"SubscriberId\": \"<string>\",\n  \"PatientId\": \"<string>\",\n  \"PatientIdType\": \"<string>\",\n  \"DateOfBirth\": \"<string>\",\n  \"FirstName\": \"<string>\",\n  \"LastName\": \"<string>\",\n  \"AdministrativeGender\": \"<string>\",\n  \"VisitId\": \"<string>\",\n  \"PurposeOfUse\": \"<string>\",\n  \"RequestSourceId\": \"<string>\",\n  \"StartDate\": \"<string>\",\n  \"EndDate\": \"<string>\",\n  \"ClaimId\": \"<string>\",\n  \"DenialRemarkCode\": \"<string>\",\n  \"ProviderOrganizationId\": \"<string>\",\n  \"MemberId\": \"<string>\",\n  \"MiddleName\": \"<string>\",\n  \"Address1\": \"<string>\",\n  \"Address2\": \"<string>\",\n  \"City\": \"<string>\",\n  \"State\": \"<string>\",\n  \"Zip\": \"<string>\",\n  \"PatientAccountNumber\": \"<string>\",\n  \"ProviderNpi\": \"<string>\",\n  \"GroupNpi\": \"<string>\",\n  \"TaxId\": \"<string>\",\n  \"ProcedureCode\": {\n    \"Type\": \"<string>\",\n    \"Category\": \"<string>\",\n    \"Section\": \"<string>\",\n    \"Codes\": \"<array>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "25a93f0d-094b-4363-a352-4bb9f158613e",
+              "name": "The user or app does not have the appropriate permissions to make this request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "claim-management-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"RequestId\": \"<string>\",\n  \"SubscriberId\": \"<string>\",\n  \"PatientId\": \"<string>\",\n  \"PatientIdType\": \"<string>\",\n  \"DateOfBirth\": \"<string>\",\n  \"FirstName\": \"<string>\",\n  \"LastName\": \"<string>\",\n  \"AdministrativeGender\": \"<string>\",\n  \"VisitId\": \"<string>\",\n  \"PurposeOfUse\": \"<string>\",\n  \"RequestSourceId\": \"<string>\",\n  \"StartDate\": \"<string>\",\n  \"EndDate\": \"<string>\",\n  \"ClaimId\": \"<string>\",\n  \"DenialRemarkCode\": \"<string>\",\n  \"ProviderOrganizationId\": \"<string>\",\n  \"MemberId\": \"<string>\",\n  \"MiddleName\": \"<string>\",\n  \"Address1\": \"<string>\",\n  \"Address2\": \"<string>\",\n  \"City\": \"<string>\",\n  \"State\": \"<string>\",\n  \"Zip\": \"<string>\",\n  \"PatientAccountNumber\": \"<string>\",\n  \"ProviderNpi\": \"<string>\",\n  \"GroupNpi\": \"<string>\",\n  \"TaxId\": \"<string>\",\n  \"ProcedureCode\": {\n    \"Type\": \"<string>\",\n    \"Category\": \"<string>\",\n    \"Section\": \"<string>\",\n    \"Codes\": \"<array>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7dc63faa-62c2-4b18-a21c-22f1aec8b115",
+              "name": "Too many requests. API rate limit reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "claim-management-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"RequestId\": \"<string>\",\n  \"SubscriberId\": \"<string>\",\n  \"PatientId\": \"<string>\",\n  \"PatientIdType\": \"<string>\",\n  \"DateOfBirth\": \"<string>\",\n  \"FirstName\": \"<string>\",\n  \"LastName\": \"<string>\",\n  \"AdministrativeGender\": \"<string>\",\n  \"VisitId\": \"<string>\",\n  \"PurposeOfUse\": \"<string>\",\n  \"RequestSourceId\": \"<string>\",\n  \"StartDate\": \"<string>\",\n  \"EndDate\": \"<string>\",\n  \"ClaimId\": \"<string>\",\n  \"DenialRemarkCode\": \"<string>\",\n  \"ProviderOrganizationId\": \"<string>\",\n  \"MemberId\": \"<string>\",\n  \"MiddleName\": \"<string>\",\n  \"Address1\": \"<string>\",\n  \"Address2\": \"<string>\",\n  \"City\": \"<string>\",\n  \"State\": \"<string>\",\n  \"Zip\": \"<string>\",\n  \"PatientAccountNumber\": \"<string>\",\n  \"ProviderNpi\": \"<string>\",\n  \"GroupNpi\": \"<string>\",\n  \"TaxId\": \"<string>\",\n  \"ProcedureCode\": {\n    \"Type\": \"<string>\",\n    \"Category\": \"<string>\",\n    \"Section\": \"<string>\",\n    \"Codes\": \"<array>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "54455bc4-5be7-4fcd-8bfc-58dacebbeab4",
+              "name": "The request was valid, but an unexpected error occured on the server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "claim-management-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"RequestId\": \"<string>\",\n  \"SubscriberId\": \"<string>\",\n  \"PatientId\": \"<string>\",\n  \"PatientIdType\": \"<string>\",\n  \"DateOfBirth\": \"<string>\",\n  \"FirstName\": \"<string>\",\n  \"LastName\": \"<string>\",\n  \"AdministrativeGender\": \"<string>\",\n  \"VisitId\": \"<string>\",\n  \"PurposeOfUse\": \"<string>\",\n  \"RequestSourceId\": \"<string>\",\n  \"StartDate\": \"<string>\",\n  \"EndDate\": \"<string>\",\n  \"ClaimId\": \"<string>\",\n  \"DenialRemarkCode\": \"<string>\",\n  \"ProviderOrganizationId\": \"<string>\",\n  \"MemberId\": \"<string>\",\n  \"MiddleName\": \"<string>\",\n  \"Address1\": \"<string>\",\n  \"Address2\": \"<string>\",\n  \"City\": \"<string>\",\n  \"State\": \"<string>\",\n  \"Zip\": \"<string>\",\n  \"PatientAccountNumber\": \"<string>\",\n  \"ProviderNpi\": \"<string>\",\n  \"GroupNpi\": \"<string>\",\n  \"TaxId\": \"<string>\",\n  \"ProcedureCode\": {\n    \"Type\": \"<string>\",\n    \"Category\": \"<string>\",\n    \"Section\": \"<string>\",\n    \"Codes\": \"<array>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://${{environment}}-api.moxehealth.com/chart-retrieval",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0d177f9a-a0d5-4d76-9f71-f1431fc800a8",
+    "name": "Chart Retrieval API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "In order to use this api, we require each request gets sent with an api key in the named header, \"x-api-key\". <br><br> We impose a rate limit for the whole api. If the rate limit is reached, the client will receive the response, \"HTTP 429 Too Many Requests\".",
+      "type": "text/plain"
+    }
+  }
+}

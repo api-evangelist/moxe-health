@@ -1,0 +1,17 @@
+generated: '2026-08-14'
+method: searched
+source: https://developer.moxehealth.com/docs/getting-started
+limit_count: 0
+limits: []
+response_headers: []
+exceeded_status: 429
+note: >-
+  The getting-started docs state a global rate limit exists ("We impose a rate limit
+  for the whole api. If the rate limit is reached, the client will receive HTTP 429
+  Too Many Requests.") but publish no numeric limit, window, burst allowance, or
+  X-RateLimit-*/RateLimit-*/Retry-After response headers — so limit_count is recorded
+  as 0 (no published numbers) even though the mechanism itself is documented. Scope is
+  described as whole-API, not per-key/per-endpoint. Cross-linked from
+  conventions/moxe-health-conventions.yml#rate_limiting.
+cross_links:
+  conventions: conventions/moxe-health-conventions.yml

@@ -1,0 +1,17 @@
+generated: '2026-08-14'
+method: searched
+source: https://registry.npmjs.org/-/v1/search?text=moxe+health, https://pypi.org/pypi/moxe/json,
+  https://pypi.org/pypi/moxehealth/json, https://api.github.com/orgs/moxehealth/repos, apis.yml
+note: >-
+  No first-party client library for the Chart Retrieval / Claim Management API was found.
+  npm registry search for "moxe health" returns unrelated packages (no publisher match).
+  PyPI has no package named "moxe" or "moxehealth" (both 404 on the registry metadata
+  endpoint). The MoxeHealth GitHub organization (github.com/moxehealth) is public but its
+  six repositories predate the current API product and are unrelated utilities (a jQuery
+  file-drop plugin, a SNOMED concept finder, JNC8 clinical guidelines, a C# MillionHearts
+  API wrapper, a GitHub Actions repo, and an empty "Moxe-Public" repo) — none is an SDK for
+  the documented Chart Retrieval / Claim Management REST API. apis.yml carries no
+  SDK/CLI/SourceCode property to derive a candidate from. Onboarding is partner-gated
+  (credentials issued after a sales consult), consistent with no self-serve client library
+  being published.
+packages: []
