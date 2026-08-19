@@ -31,7 +31,7 @@ tags:
 - Risk Adjustment
 created: '2026-07-24'
 modified: '2026-07-24T12:00:00Z'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: moxe-health:moxe-health-chart-retrieval-api
   name: Moxe Health Chart Retrieval API
