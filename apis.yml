@@ -33,24 +33,16 @@ created: '2026-07-24'
 modified: '2026-07-24T12:00:00Z'
 specificationVersion: '0.23'
 apis:
-- aid: moxe-health:moxe-health-chart-retrieval-api
-  name: Moxe Health Chart Retrieval API
-  description: Initiate a patient chart request and check its status. The API ingests
-    a release-of-information request with member and demographic identifiers, searches
-    connected EHRs for the specified patient and date-of-service range, and delivers
-    the extracted clinical data to a predetermined SFTP location. REST/JSON, OpenAPI
-    3.0.1, secured with OAuth2 client-credentials plus an x-api-key header.
+- aid: moxe-health:moxe-health-claims-api
+  name: Moxe Health Claims API
+  description: The Claims API from Moxe Health — 2 operation(s) for claims.
   humanURL: https://developer.moxehealth.com/reference/overview
   baseURL: https://int-api.moxehealth.com/chart-retrieval
   tags:
-  - Patient
-  - Chart Retrieval
-  - Clinical Data
+  - Claims
   properties:
   - type: OpenAPI
-    url: openapi/moxe-health-chart-retrieval-initiate-openapi.json
-  - type: OpenAPI
-    url: openapi/moxe-health-chart-retrieval-status-openapi.json
+    url: openapi/moxe-health-claims-api-openapi.yml
   - type: Documentation
     url: https://developer.moxehealth.com/reference/overview
   - type: APIReference
@@ -61,31 +53,34 @@ apis:
     url: https://developer.moxehealth.com/reference/request-source-ids
   - type: Authentication
     url: https://developer.moxehealth.com/docs/authentication
-- aid: moxe-health:moxe-health-claim-management-api
-  name: Moxe Health Claim Management API
-  description: Initiate a claim management request and check its status. Retrieves
-    the clinical chart supporting a specific claim by member and claim identifiers,
-    then delivers the extracted data to a predetermined location. REST/JSON, OpenAPI
-    3.0.1, secured with OAuth2 client-credentials plus an x-api-key header.
-  humanURL: https://developer.moxehealth.com/reference/overview
-  baseURL: https://int-api.moxehealth.com/chart-retrieval
-  tags:
-  - Claims
-  - Claim Management
-  - Clinical Data
-  properties:
-  - type: OpenAPI
-    url: openapi/moxe-health-claim-management-initiate-openapi.json
-  - type: OpenAPI
-    url: openapi/moxe-health-claim-management-status-openapi.json
-  - type: Documentation
-    url: https://developer.moxehealth.com/reference/overview
   - type: APIReference
     url: https://developer.moxehealth.com/reference/initiateclaimmanagementrequest
   - type: APIReference
     url: https://developer.moxehealth.com/reference/getclaimmanagementrequeststatus
+- aid: moxe-health:moxe-health-patient-api
+  name: Moxe Health Patient API
+  description: The Patient API from Moxe Health — 2 operation(s) for patient.
+  humanURL: https://developer.moxehealth.com/reference/overview
+  baseURL: https://int-api.moxehealth.com/chart-retrieval
+  tags:
+  - Patient
+  properties:
+  - type: OpenAPI
+    url: openapi/moxe-health-patient-api-openapi.yml
+  - type: Documentation
+    url: https://developer.moxehealth.com/reference/overview
+  - type: APIReference
+    url: https://developer.moxehealth.com/reference/initiatechartrequest
+  - type: APIReference
+    url: https://developer.moxehealth.com/reference/getchartrequeststatus
+  - type: Documentation
+    url: https://developer.moxehealth.com/reference/request-source-ids
   - type: Authentication
     url: https://developer.moxehealth.com/docs/authentication
+  - type: APIReference
+    url: https://developer.moxehealth.com/reference/initiateclaimmanagementrequest
+  - type: APIReference
+    url: https://developer.moxehealth.com/reference/getclaimmanagementrequeststatus
 common:
 - type: TrustCenter
   url: security/moxe-health-trust-center.yml
