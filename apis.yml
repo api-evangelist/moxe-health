@@ -94,6 +94,9 @@ apis:
   - type: APIReference
     url: https://developer.moxehealth.com/reference/getclaimmanagementrequeststatus
 common:
+- type: CapabilityMap
+  url: capabilities/moxe-health-capability-edges.yml
+  name: Moxe Health Business Capability Map
 - type: TrustCenter
   url: security/moxe-health-trust-center.yml
 - type: DomainSecurity
