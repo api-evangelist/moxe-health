@@ -5,6 +5,17 @@ info:
   summary: >-
     Initiate a release-of-information request for a patient's clinical chart, then poll the
     status endpoint with the returned moxeRequestId until Moxe delivers the chart via SFTP.
+  x-realizes-capability-ids:
+  - BC-2900.30
+  x-capability-derivation:
+    method: 'deterministic join: sourceDescriptions -> per-tag OpenAPI -> tag/capability edge. No classification at this step.'
+    min_confidence: 0.7
+    sources:
+    - capability_id: BC-2900.30
+      capability_name: Release of Information
+      spec: moxe-health-patient-api-openapi.yml
+      confidence: 0.75
+    model: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities, CC BY 4.0
 sourceDescriptions:
 - name: patientApi
   url: ../openapi/moxe-health-patient-api-openapi.yml
