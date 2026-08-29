@@ -17,6 +17,18 @@ description: >-
   compliant and was named number 1 Best in KLAS for Payer-Provider Data Exchange. The
   documented API is REST/JSON rather than HL7 FHIR, and full access is granted through
   a partner onboarding agreement.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Healthcare
