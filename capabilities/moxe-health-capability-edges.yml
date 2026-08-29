@@ -18,9 +18,10 @@ edges:
   capability_id: BC-2900.30
   capability_id_l1: BC-2900
   capability_name: Release of Information
-  confidence: 0.75
-  evidence: POST /v1/patient-chart-request 'Initiate Request'; schemas 'patientChartRequestRequest, patientChartRequestStatus';
-    vendor 'ingests release-of-information (ROI) requests, searches connected electronic health records
-    (EHRs)'
-  reason: The tag covers initiating and tracking patient chart (medical record) requests against connected
-    EHRs, which is receipt, validation and fulfilment of requests for protected health information.
+  confidence: 0.7
+  evidence: 'POST /v1/patient-chart-request  initiateChartRequest  Initiate Request; vendor: ''ingests
+    release-of-information (ROI) requests, searches connected electronic health records (EHRs) to extract
+    the minimum-necessary'''
+  reason: The operations initiate and track requests for a patient's chart between payers and health systems
+    — receipt, validation and fulfilment of requests for protected health information. Could alternatively
+    be classified as health information exchange/interoperability operations, so not maximal confidence.
