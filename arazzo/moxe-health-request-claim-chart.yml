@@ -6,11 +6,8 @@ info:
     Initiate a claim-management request to retrieve the clinical chart supporting a specific
     claim, then poll the status endpoint with the returned moxeRequestId.
 sourceDescriptions:
-- name: claimInitiate
-  url: ../openapi/moxe-health-claim-management-initiate-openapi.json
-  type: openapi
-- name: claimStatus
-  url: ../openapi/moxe-health-claim-management-status-openapi.json
+- name: claimsApi
+  url: ../openapi/moxe-health-claims-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: requestClaimChart

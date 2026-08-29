@@ -6,11 +6,8 @@ info:
     Initiate a release-of-information request for a patient's clinical chart, then poll the
     status endpoint with the returned moxeRequestId until Moxe delivers the chart via SFTP.
 sourceDescriptions:
-- name: chartInitiate
-  url: ../openapi/moxe-health-chart-retrieval-initiate-openapi.json
-  type: openapi
-- name: chartStatus
-  url: ../openapi/moxe-health-chart-retrieval-status-openapi.json
+- name: patientApi
+  url: ../openapi/moxe-health-patient-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: requestPatientChart
