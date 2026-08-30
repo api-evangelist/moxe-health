@@ -1,0 +1,283 @@
+openapi: 3.2.0
+info:
+  title: Moxe Health Claims API
+  version: 0.1.0
+  description: 'Operations tagged Claims across 2 of this provider''s published API definitions: moxe-health-claim-management-initiate-openapi.json, moxe-health-claim-management-status-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://${environment}-api.moxehealth.com/chart-retrieval
+tags:
+- name: Claims
+paths:
+  /v1/claim-management-request:
+    post:
+      tags:
+      - Claims
+      summary: Initiate Claim Request
+      description: Initiate a new request for claim management
+      operationId: initiateClaimManagementRequest
+      requestBody:
+        description: Information about the patient whose data is being requested
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/claimManagementRequestRequest'
+        required: true
+      x-amazon-apigateway-integration:
+        type: http_proxy
+        uri: https://${environment}-chaselistmanager.moxehealth.com/chart-retrieval/v1/claim-management-request
+        httpMethod: POST
+        connectionType: VPC_LINK
+        connectionId: ${vpc_link}
+      responses:
+        '202':
+          description: Claim Management request was accepted but processing has not necessarily begun
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/patientChartRequestResponse'
+        '400':
+          description: Invalid input
+        '401':
+          description: The user or app initiating the request was not authenticated. Reauthenticate and try again.
+        '403':
+          description: The user or app does not have the appropriate permissions to make this request
+        '429':
+          description: Too many requests. API rate limit reached.
+        '500':
+          description: The request was valid, but an unexpected error occured on the server
+      security:
+      - moxe_auth:
+        - write:claim-management-request
+      - ${environment}-chart-retrieval-api-authorizer: []
+      - x-api-key: []
+    servers:
+    - url: https://${environment}-api.moxehealth.com/chart-retrieval
+  /v1/claim-management-request/{moxeRequestId}/status:
+    get:
+      tags:
+      - Claims
+      summary: Get Claim Status
+      description: Get the status of the specified claim management request
+      operationId: getClaimManagementRequestStatus
+      parameters:
+      - in: path
+        name: moxeRequestId
+        schema:
+          type: string
+        required: true
+        description: The moxeRequestId provided by us when the claim-management-request in question was created
+      x-amazon-apigateway-integration:
+        type: http_proxy
+        uri: https://${environment}-chaselistmanager.moxehealth.com/chart-retrieval/v1/claim-management-request/{moxeRequestId}/status
+        httpMethod: GET
+        connectionType: VPC_LINK
+        connectionId: ${vpc_link}
+        requestParameters:
+          integration.request.path.moxeRequestId: method.request.path.moxeRequestId
+      responses:
+        '200':
+          description: Successfully determined the status of the given request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/claimManagementRequestStatus'
+        '401':
+          description: The user or app initiating the request was not authenticated. Reauthenticate and try again.
+        '404':
+          description: A claim management request with the given moxeRequestId could not be found. This means that either you are not authorized to access the request or it does not exist.
+        '429':
+          description: Too many requests. API rate limit reached.
+        '500':
+          description: The request was valid, but an unexpected error occured on the server
+      security:
+      - moxe_auth:
+        - read:claim-management-request
+      - ${environment}-chart-retrieval-api-authorizer: []
+      - x-api-key: []
+    servers:
+    - url: https://${environment}-api.moxehealth.com/chart-retrieval
+components:
+  schemas:
+    link:
+      type: object
+      properties:
+        href:
+          type: string
+          description: A URL endpoint used to fetch the status of the request
+        method:
+          type: string
+          description: The HTTP verb used with the href to return the status of the request
+    claimManagementRequestRequest:
+      required:
+      - RequestId
+      - SubscriberId
+      - PatientId
+      - PatientIdType
+      - DateOfBirth
+      - FirstName
+      - LastName
+      - AdministrativeGender
+      - VisitId
+      - PurposeOfUse
+      - RequestSourceId
+      - StartDate
+      - EndDate
+      - ClaimId
+      - DenialRemarkCode
+      - ProviderOrganizationId
+      type: object
+      properties:
+        RequestId:
+          type: string
+          description: Customer generated RequestId. This does not have to be unique between requests.
+        MemberId:
+          type: string
+          description: Member’s Unique Identifier
+        SubscriberId:
+          type: string
+          description: Member’s coverage provided through this individual
+        PatientId:
+          type: string
+          description: Patient’s unique identifier
+        PatientIdType:
+          type: string
+          description: Patient’s unique identifier type
+        DateOfBirth:
+          type: string
+          description: Member’s date of birth (YYYY-MM-DD)
+        FirstName:
+          type: string
+          description: Member’s first name
+        LastName:
+          type: string
+          description: Member’s last name
+        MiddleName:
+          type: string
+          description: Member’s middle name
+        AdministrativeGender:
+          type: string
+          description: Member’s gender. Allowed values — male, female, other, unknown.
+        VisitId:
+          type: string
+          description: Encounter identifier
+        Address1:
+          type: string
+          description: Member’s primary address line 1
+        Address2:
+          type: string
+          description: Member’s primary address line 2
+        City:
+          type: string
+          description: Member’s primary city
+        State:
+          type: string
+          description: Member’s primary state (2 letter abbreviation)
+        Zip:
+          type: string
+          description: Member’s primary 5-digit zip code
+        PurposeOfUse:
+          type: string
+          description: The reason for the request. Work with your Moxe representative to discuss allowed values.
+        RequestSourceId:
+          type: string
+          description: The group authorized to issue the request. Work with your Moxe representative to discuss allowed values.
+        StartDate:
+          type: string
+          description: The start date of service for data to include in the request (YYYY-MM-DD)
+        EndDate:
+          type: string
+          description: The end date of service for data to include in the request (YYYY-MM-DD)
+        ProviderOrganizationId:
+          type: string
+          description: An identifier agreed used to specify the organization from which Moxe will pull data. Work with your Moxe representative to discuss allowed values.
+        ClaimId:
+          type: string
+          description: Claim invoice identifier
+        PatientAccountNumber:
+          type: string
+          description: Patient account identifier in provider system
+        DenialRemarkCode:
+          type: string
+          description: Claim adjustment code
+        ProviderNpi:
+          type: string
+          description: The Type 1 NPI associated with the request
+        GroupNpi:
+          type: string
+          description: The Type 2 NPI associated with the request location
+        TaxId:
+          type: string
+          description: The TaxID associated with the request location
+        ProcedureCode:
+          type: object
+          properties:
+            Type:
+              type: string
+            Category:
+              type: string
+            Section:
+              type: string
+            Codes:
+              type: array
+    patientChartRequestResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            moxeRequestId:
+              type: string
+              description: The unique identifier of this request within Moxe's system
+            links:
+              type: array
+              description: A list of links that can be used to access resources related to the created patient chart request
+              items:
+                $ref: '#/components/schemas/link'
+        createdDate:
+          type: string
+          format: date-time
+          description: The timestamp of when this request was created
+        createdBy:
+          type: string
+          description: The unique identifier of the client that initiated this request
+    claimManagementRequestStatus:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            requestId:
+              type: string
+              description: The request ID initially provided when the request was initiated
+            moxeRequestId:
+              type: string
+              description: The unique identifier of this request within Moxe's system
+            requestStatusCode:
+              type: string
+              description: A code representing the current status of the request
+            requestStatusDescription:
+              type: string
+              description: A human-readable description of the status of the request, which correspends to the requestStatusCode
+            requestStatusDateTime:
+              type: string
+              format: date-time
+              description: The timestamp of when the request entered into the reported status
+  securitySchemes:
+    moxe_auth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://${environment}-api.moxehealth.com/oauth/token
+          scopes:
+            write:patient-chart-request: create patient chart transactions
+            read:patient-chart-request: get information on existing transactions
+x-refined-from:
+- moxe-health-claim-management-initiate-openapi.json
+- moxe-health-claim-management-status-openapi.json
+x-readme:
+  explorer-enabled: false
+  proxy-enabled: true
+x-amazon-apigateway-importexport-version: '1.0'
+x-si-base: ./api/chartretrievalapi.yaml
+x-github-repo: MoxeHealth/ChaseListManager
+x-github-sha: 6705c89c377f138b5d91395fcaba1440c7aed96a
