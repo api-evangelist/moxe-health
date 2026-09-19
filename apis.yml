@@ -49,6 +49,17 @@ tags:
 - United States
 - Interoperability
 - Clinical Data
+- Payers
+- Providers
+- EHR
+- Health Data Exchange
+- Claims
+- Risk Adjustment
+tags_raw:
+- Healthcare
+- United States
+- Interoperability
+- Clinical Data
 - Payer
 - Provider
 - EHR
@@ -89,6 +100,8 @@ apis:
   humanURL: https://developer.moxehealth.com/reference/overview
   baseURL: https://int-api.moxehealth.com/chart-retrieval
   tags:
+  - Patients
+  tags_raw:
   - Patient
   properties:
   - type: OpenAPI
