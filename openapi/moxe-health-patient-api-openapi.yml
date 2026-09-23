@@ -98,15 +98,27 @@ paths:
     - url: https://${environment}-api.moxehealth.com/chart-retrieval
 components:
   schemas:
-    link:
+    patientChartRequestResponse:
       type: object
       properties:
-        href:
+        data:
+          type: object
+          properties:
+            moxeRequestId:
+              type: string
+              description: The unique identifier of this request within Moxe's system
+            links:
+              type: array
+              description: A list of links that can be used to access resources related to the created patient chart request
+              items:
+                $ref: '#/components/schemas/link'
+        createdDate:
           type: string
-          description: A URL endpoint used to fetch the status of the request
-        method:
+          format: date-time
+          description: The timestamp of when this request was created
+        createdBy:
           type: string
-          description: The HTTP verb used with the href to return the status of the request
+          description: The unique identifier of the client that initiated this request
     patientChartRequestRequest:
       required:
       - RequestId
@@ -179,27 +191,15 @@ components:
         TIN:
           type: string
           description: The organization tax identifier number from which Moxe will pull data.
-    patientChartRequestResponse:
+    link:
       type: object
       properties:
-        data:
-          type: object
-          properties:
-            moxeRequestId:
-              type: string
-              description: The unique identifier of this request within Moxe's system
-            links:
-              type: array
-              description: A list of links that can be used to access resources related to the created patient chart request
-              items:
-                $ref: '#/components/schemas/link'
-        createdDate:
+        href:
           type: string
-          format: date-time
-          description: The timestamp of when this request was created
-        createdBy:
+          description: A URL endpoint used to fetch the status of the request
+        method:
           type: string
-          description: The unique identifier of the client that initiated this request
+          description: The HTTP verb used with the href to return the status of the request
     patientChartRequestStatus:
       type: object
       properties:

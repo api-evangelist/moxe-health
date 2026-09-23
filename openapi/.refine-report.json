@@ -1,0 +1,34 @@
+{
+  "provider": "moxe-health",
+  "sources": [
+    "_original/moxe-health-chart-retrieval-initiate-openapi.json",
+    "_original/moxe-health-chart-retrieval-status-openapi.json",
+    "_original/moxe-health-claim-management-initiate-openapi.json",
+    "_original/moxe-health-claim-management-status-openapi.json"
+  ],
+  "outputs": [
+    "moxe-health-patient-api-openapi.yml",
+    "moxe-health-claims-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (4 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "moxe-health-chart-retrieval-initiate-openapi.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "moxe-health-chart-retrieval-initiate-openapi.json: declared missing tag: Patient",
+    "moxe-health-chart-retrieval-status-openapi.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "moxe-health-chart-retrieval-status-openapi.json: declared missing tag: Patient",
+    "moxe-health-claim-management-initiate-openapi.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "moxe-health-claim-management-initiate-openapi.json: declared missing tag: Claims",
+    "moxe-health-claim-management-status-openapi.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "moxe-health-claim-management-status-openapi.json: declared missing tag: Claims",
+    "tag 'Patient' spans 2 source specs (moxe-health-chart-retrieval-initiate-openapi.json, moxe-health-chart-retrieval-status-openapi.json): per-path servers applied",
+    "tag 'Claims' spans 2 source specs (moxe-health-claim-management-initiate-openapi.json, moxe-health-claim-management-status-openapi.json): per-path servers applied",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "moxe-health-claims-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moxe-health-patient-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

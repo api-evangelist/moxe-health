@@ -98,6 +98,27 @@ paths:
     - url: https://${environment}-api.moxehealth.com/chart-retrieval
 components:
   schemas:
+    patientChartRequestResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            moxeRequestId:
+              type: string
+              description: The unique identifier of this request within Moxe's system
+            links:
+              type: array
+              description: A list of links that can be used to access resources related to the created patient chart request
+              items:
+                $ref: '#/components/schemas/link'
+        createdDate:
+          type: string
+          format: date-time
+          description: The timestamp of when this request was created
+        createdBy:
+          type: string
+          description: The unique identifier of the client that initiated this request
     link:
       type: object
       properties:
@@ -219,27 +240,6 @@ components:
               type: string
             Codes:
               type: array
-    patientChartRequestResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            moxeRequestId:
-              type: string
-              description: The unique identifier of this request within Moxe's system
-            links:
-              type: array
-              description: A list of links that can be used to access resources related to the created patient chart request
-              items:
-                $ref: '#/components/schemas/link'
-        createdDate:
-          type: string
-          format: date-time
-          description: The timestamp of when this request was created
-        createdBy:
-          type: string
-          description: The unique identifier of the client that initiated this request
     claimManagementRequestStatus:
       type: object
       properties:
