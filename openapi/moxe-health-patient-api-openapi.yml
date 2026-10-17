@@ -98,15 +98,6 @@ paths:
     - url: https://${environment}-api.moxehealth.com/chart-retrieval
 components:
   schemas:
-    link:
-      type: object
-      properties:
-        href:
-          type: string
-          description: A URL endpoint used to fetch the status of the request
-        method:
-          type: string
-          description: The HTTP verb used with the href to return the status of the request
     patientChartRequestRequest:
       required:
       - RequestId
@@ -179,6 +170,15 @@ components:
         TIN:
           type: string
           description: The organization tax identifier number from which Moxe will pull data.
+    link:
+      type: object
+      properties:
+        href:
+          type: string
+          description: A URL endpoint used to fetch the status of the request
+        method:
+          type: string
+          description: The HTTP verb used with the href to return the status of the request
     patientChartRequestResponse:
       type: object
       properties:
